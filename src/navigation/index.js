@@ -7,12 +7,14 @@ import HomeScreen from '../components/screens/HomeScreen';
 import InvoiceScreen from '../components/screens/InvoicesScreen';
 import ItemDetailScreen from '../components/screens/ItemDetailScreen';
 import OrderDetailsPage from '../components/screens/OrderDetailsScreen';
+import OnboardingScreens from '../components/screens/OnboardingScreen';
 
 const Stack = createNativeStackNavigator();
 
 const RootNavigator = () =>{
     return(
-    <Stack.Navigator initialRouteName="Home">
+    <Stack.Navigator initialRouteName="Onboarding">
+        <Stack.Screen name='Onboarding' component={OnboardingScreens} options={{headerShown:false}}/>
         <Stack.Screen name='Home' component={HomeTabs}
         />
         <Stack.Screen name='Orders' 
