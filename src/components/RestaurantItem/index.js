@@ -5,7 +5,7 @@ const RestaurantItem = ({order}) => {
   const navigation = useNavigation()
 
   const onPress = () =>{
-    navigation.navigate("Orders" , {id : order.id})
+    navigation.navigate("Invoices" , {id : order.id})
   }
 
   return (

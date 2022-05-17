@@ -1,13 +1,16 @@
+import 'react-native-gesture-handler';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View , FlatList , Image} from 'react-native';
 
 import {NavigationContainer} from '@react-navigation/native'
 import RootNavigator from './src/navigation';
-// import restaurants from './src/components/Data.json';
-// import Data from './src/components/Data.js'
-// import Orders from './src/components/OrderList/Orders.jsx';
+import {Amplify} from 'aws-amplify';
+import config from './src/aws-exports';
+import {withAuthenticator} from 'aws-amplify-react-native/';
 
-export default function App() {
+Amplify.configure(config)
+
+function App() {
   return (
     <NavigationContainer>
         <RootNavigator/>
@@ -16,11 +19,4 @@ export default function App() {
   );
 }
 
-// const styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//     backgroundColor: '#fff',
-//     alignItems: 'center',
-//     justifyContent: 'center',
-//   },
-// });
+export default withAuthenticator(App);

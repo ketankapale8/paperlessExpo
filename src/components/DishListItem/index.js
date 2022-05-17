@@ -19,7 +19,6 @@ const DishListItem = ({ dish }) => {
             <Text style={styles.qty}> Quantity - {dish.qty}</Text>
             <Text style={styles.packof}> Pack -{dish.packof}</Text>
         </View>
-
       </View>
       </View >
     

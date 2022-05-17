@@ -54,7 +54,6 @@ const Square = ({ isLight, selected }) => {
         width: 70,
       }}
       textStyle={{ color: color(isLight) }}
-    
       {...props}
     >
       {skipLabel}
@@ -91,7 +90,7 @@ const OnboardingScreens = () => {
       
       {
         backgroundColor: 'white',
-        image: <Image source={require('../../OnboardingImgs/1.png')} style={{ width:300 , height:200 , marginTop:50}} />,
+        image: <Image source={require('../../OnboardingImgs/1.png')} style={{ width:300 , height:200 , marginTop:50 }} />,
         title: 'Shopping from a local store',
         subtitle: 'Check for Paperless Option',
       },
