@@ -4,11 +4,11 @@ import { StyleSheet, Text, View , FlatList , Image} from 'react-native';
 
 import {NavigationContainer} from '@react-navigation/native'
 import RootNavigator from './src/navigation';
-import {Amplify} from 'aws-amplify';
+// import {Amplify} from 'aws-amplify';
 import config from './src/aws-exports';
-import {withAuthenticator} from 'aws-amplify-react-native/';
+// import {withAuthenticator} from 'aws-amplify-react-native/';
 
-Amplify.configure(config)
+// Amplify.configure(config)
 
 function App() {
   return (
@@ -19,4 +19,4 @@ function App() {
   );
 }
 
-export default withAuthenticator(App);
+export default App;
