@@ -1,6 +1,8 @@
 import 'react-native-gesture-handler';
+// import React { useEffect , useState } from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {createMaterialBottomTabNavigator} from '@react-navigation/material-bottom-tabs'
+import {createMaterialBottomTabNavigator} from '@react-navigation/material-bottom-tabs';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs'
 import { Ionicons } from '@expo/vector-icons';
 import { FontAwesome5 } from '@expo/vector-icons';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
@@ -13,17 +15,36 @@ import OnboardingScreens from '../components/screens/OnboardingScreen';
 import ProfileScreen from '../components/screens/ProfileScreen';
 import Settings from '../components/screens/SettingsScreen/Settings';
 import CustomDrawer from '../components/CustomDrawer/CustomDrawer';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useAuthContext } from '../contexts/AuthContext';
+
 
 // const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator()
 
 const RootNavigator = () =>{
+    const {dbUser} = useAuthContext()
+    // const [isFirstLaunch , setisFirstLaunch] = useState(null)
+    
+    // useEffect(()=>{
+    //     AsyncStorage.getItem('alreadyLaunched').then(value=>{
+    //         if(value == null){
+    //             AsyncStorage.setItem('alreadyLaunched' , 'true');
+    //             setisFirstLaunch(true)
+    //         }else{
+    //             setisFirstLaunch(false)
+    //         }
+    //     })
+    // }, []) 
+
+    
     return(
     <Drawer.Navigator
     drawerContent={props => <CustomDrawer {...props}/>}
     initialRouteName="Onboarding" 
     screenOptions={{ headerShown : false}}>
-
+        
+        
         <Drawer.Screen name='Onboarding' component={OnboardingScreens} options={{headerShown:false}}/>
         <Drawer.Screen name='Home' component={HomeTabs}
         options={{
@@ -64,18 +85,20 @@ const RootNavigator = () =>{
     )
 };
 
-const Tab = createMaterialBottomTabNavigator();
+const Tab = createBottomTabNavigator();
 
 const HomeTabs = () =>{
+    
     return(
     <Tab.Navigator 
     shifting={false}
     labeled={true}
+    screenOptions={{headerShown:false}}
     sceneAnimationEnabled={false}
     barStyle={{ 
         backgroundColor: 'white' }}
     >
-        <Tab.Screen name='Home' component={HomeScreen} options={{tabBarIcon: ()=> <Ionicons name="home" size={24} color="black" />}}/>
+        <Tab.Screen name='Home' component={HomeScreen} options={{tabBarIcon: ()=> <Ionicons name="home" size={24} color="black"/> , headerShown:false }}/>
         <Tab.Screen name='Orders' component={InvoiceScreen} options={{tabBarIcon: ()=> <FontAwesome5 name="file-invoice" size={24} color="black" /> }}/>
         {/* <Tab.Screen name='Invoices' component={OrderDetailsPage} options={{tabBarIcon: ()=> <FontAwesome5 name="receipt" size={24} color="black" /> }} /> */}
         {/* <Tab.Screen name='Details' component={ItemDetailScreen} options={{tabBarIcon: ()=> <FontAwesome5 name="print" size={24} color="black" /> }} /> */}

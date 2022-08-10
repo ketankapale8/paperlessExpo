@@ -1,15 +1,15 @@
 {
-  "dev": {
+  "staging": {
     "awscloudformation": {
-      "AuthRoleName": "amplify-paper-dev-160817-authRole",
-      "UnauthRoleArn": "arn:aws:iam::291638267998:role/amplify-paper-dev-160817-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::291638267998:role/amplify-paper-dev-160817-authRole",
+      "AuthRoleName": "amplify-paper-staging-41430-authRole",
+      "UnauthRoleArn": "arn:aws:iam::241165706326:role/amplify-paper-staging-41430-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::241165706326:role/amplify-paper-staging-41430-authRole",
       "Region": "us-east-1",
-      "DeploymentBucketName": "amplify-paper-dev-160817-deployment",
-      "UnauthRoleName": "amplify-paper-dev-160817-unauthRole",
-      "StackName": "amplify-paper-dev-160817",
-      "StackId": "arn:aws:cloudformation:us-east-1:291638267998:stack/amplify-paper-dev-160817/209cc800-dda9-11ec-8267-0eb8c7bb5923",
-      "AmplifyAppId": "d2rv8yl2aqfzpf"
+      "DeploymentBucketName": "amplify-paper-staging-41430-deployment",
+      "UnauthRoleName": "amplify-paper-staging-41430-unauthRole",
+      "StackName": "amplify-paper-staging-41430",
+      "StackId": "arn:aws:cloudformation:us-east-1:241165706326:stack/amplify-paper-staging-41430/eebdc830-1862-11ed-8389-0a7e88142fa9",
+      "AmplifyAppId": "d21vy75wvs4v4n"
     },
     "categories": {
       "auth": {

@@ -7,9 +7,9 @@ const OrdersHeader = ({ order }) => {
       <Image source={order.image} style={styles.image} />
 
       <View style={styles.container}>
-        <Text style={styles.title}>{order.Vendortitle}</Text>
+        <Text style={styles.title}>{order.name}</Text>
         <Text style={styles.subtitle}>
-          Rs: {order.total} &#8226; {order.purchaseDate}
+           &#8226; {order.updatedAt}
         </Text>
         <Text style={styles.menuTitle}>Items</Text>
       </View>

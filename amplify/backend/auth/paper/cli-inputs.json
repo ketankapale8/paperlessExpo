@@ -3,7 +3,7 @@
   "cognitoConfig": {
     "identityPoolName": "testAuthIdentityPool",
     "allowUnauthenticatedIdentities": false,
-    "resourceNameTruncated": "paper47d445c1",
+    "resourceNameTruncated": "paper9624ef14",
     "userPoolName": "paper",
     "autoVerifiedAttributes": [
       "email"
@@ -17,7 +17,7 @@
     "emailVerificationSubject": "Verification code: {####}",
     "emailVerificationMessage": "Verification code: {####}",
     "defaultPasswordPolicy": false,
-    "passwordPolicyMinLength": 8,
+    "passwordPolicyMinLength": 6,
     "passwordPolicyCharacters": [],
     "requiredAttributes": [],
     "aliasAttributes": [],
@@ -25,9 +25,9 @@
     "userpoolClientRefreshTokenValidity": 30,
     "userpoolClientWriteAttributes": [],
     "userpoolClientReadAttributes": [],
-    "userpoolClientLambdaRole": "paper47d445c1_userpoolclient_lambda_role",
+    "userpoolClientLambdaRole": "paper9624ef14_userpoolclient_lambda_role",
     "userpoolClientSetAttributes": false,
-    "sharedId": "47d445c1",
+    "sharedId": "9624ef14",
     "resourceName": "paper",
     "authSelections": "identityPoolAndUserPool",
     "serviceName": "Cognito",

@@ -1,8 +1,12 @@
 import { View, Text, StyleSheet, Image, Pressable } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
-const DishListItem = ({ dish }) => {
-  const navigation = useNavigation();
+const DishListItem = ({items}) => {
+  console.log(items)
+
+  // const navigation = useNavigation();
+  // const route = useRoute();
+  // const items = route.params?.items;
   return (
     <Pressable
       // onPress={() => navigation.navigate("Details")}
@@ -10,14 +14,14 @@ const DishListItem = ({ dish }) => {
     >
     <View style={styles.container}>
       <View style={{ flex: 1 }}>
-        <Text style={styles.name}>{dish.title}</Text>
+        <Text style={styles.name}>{items.itemName}</Text>
         <Text style={styles.description} numberOfLines={2}>
-          {dish.desc}
+          {items.category}
         </Text>
         <View style={{paddingLeft:'75%', marginTop:-50}}>
-            <Text style={styles.price}>Rs {dish.amt} /-</Text>
-            <Text style={styles.qty}> Quantity - {dish.qty}</Text>
-            <Text style={styles.packof}> Pack -{dish.packof}</Text>
+            <Text style={styles.price}>Rs {items.price} /-</Text>
+            <Text style={styles.qty}> Quantity - {items.qty}</Text>
+            {/* <Text style={styles.packof}> Pack -{dish.packof}</Text> */}
         </View>
       </View>
       </View >

@@ -1,6 +1,25 @@
-type Todo @model @auth(rules: [{allow: public}]) {
+type Cart @model @auth(rules: [{allow: public}]) {
   id: ID!
-  name: String!
-  description: String
+  itemName: String
+  category: String
+  tax: Float
+  price: Float
+  qty: Int
+  total_amt: Float
+  discount: Float
+  amt_due: Float
 }
- 
+
+type UserData @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  Name: String
+  Address: String
+  CardNo: String
+  AadhaarNo: String
+  Email: String
+  Mobile: String
+  Alternate_mob: String
+  State: String
+  Country: String
+  sub: String
+}

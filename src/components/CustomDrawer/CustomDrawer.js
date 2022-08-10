@@ -4,6 +4,7 @@ import { Ionicons } from '@expo/vector-icons';
 import {DrawerContentScrollView,DrawerItemList} from '@react-navigation/drawer'
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { FontAwesome } from '@expo/vector-icons';
+import {Auth} from 'aws-amplify'
 
 const CustomDrawer = (props) => {
   return (
@@ -24,7 +25,7 @@ const CustomDrawer = (props) => {
           <TouchableOpacity onPress={()=>{}} style={{paddingVertical:15}}>
               <View style={{display:'flex', flexDirection:'row'}}>
                     <FontAwesome name="sign-out" size={24} color="black" />
-                    <Text style={{paddingLeft:25, marginBottom:-10}}>SignOut</Text>
+                    <Text onPress={()=> Auth.signOut()} style={{paddingLeft:25, marginBottom:-10}}>SignOut</Text>
               </View>
           </TouchableOpacity>
       </View>
