@@ -1,4 +1,4 @@
-import { StyleSheet, FlatList, View, Text, Image } from "react-native";
+import { StyleSheet, FlatList, View, Text, Image, RefreshControl } from "react-native";
 import RestaurantItem from "../../RestaurantItem/index.js";
 
 import Data from "../../Data.js";
@@ -12,7 +12,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 // import { sliderData } from "../../CarousalData.js";
 import { windowWidth, windowHeight } from "../../utils/utils.js";
 import Swiper from "react-native-swiper";
-import { ScrollView } from "react-native-gesture-handler";
+import { ScrollView } from "react-native";
 
 // import { DataStore } from "aws-amplify";
 // import { Cart } from "../../../models/index.js";
@@ -23,10 +23,12 @@ const HomeScreen = () => {
   const [fetchData, getFetchedData] = useState([]);
   const [userData, getUserData] = useState([]);
   const [imgActive, setImgActive] = useState(0);
+  const [refreshing, setisRefreshing] = useState(false);
 
   useEffect(() => {
     getData();
     fetchCartItems();
+    getFetchedData()
     // getUserData
     // customUserData();
   }, []);
@@ -48,16 +50,28 @@ const HomeScreen = () => {
     // getUserData(fetchData?.allCarts?.filter(item=>item.email === name.result.email))
   };
 
-  const onChange = (nativeEvent) => {};
+  const onRefresh = () => {
+    setisRefreshing(true);
+    fetchCartItems();
+    setisRefreshing(false)
+  };
 
   let items = fetchData?.allCarts?.filter(
-    (item) => item?.email === name.result.email
+    (item) => item?.email === name.result?.email
   );
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: "#fff" }}>
-      <ScrollView style={styles.wrapper}>
-      <Swiper style={styles.wrap} showsButtons={true}>
+      <ScrollView style={{padding: 1}} 
+        refreshControl={
+          <RefreshControl
+            refreshing={false}
+            onRefresh={onRefresh}
+          />
+        }
+      >
+        <View style={styles.wrap}>
+      <Swiper style={styles.wrapper} showsButtons={true}>
         <View style={styles.slide1}>
           <Text style={styles.text}>Shopping from a local store</Text>
         </View>
@@ -71,6 +85,7 @@ const HomeScreen = () => {
           <Text style={styles.text}>Save Paper,Go Paperless</Text>
         </View>
       </Swiper>
+       </View>
 
       {/* {items ? (  */}
       <View style={styles.page}>
@@ -82,6 +97,7 @@ const HomeScreen = () => {
           )}
           showsVerticalScrollIndicator={false}
           keyExtractor={(item) => item.name}
+          
         />
       </View>
       {/* ) :  ( */}

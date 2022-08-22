@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useDispatch } from "react-redux";
 import {setLogout} from '../../../redux/features/authSlice'
+import { useNavigation } from "@react-navigation/native";
 
 
 const Profile = () => {
@@ -17,10 +18,13 @@ const Profile = () => {
   const [Country , setCountry] = useState("");
 
   const dispatch = useDispatch()
+  const navigation = useNavigation();
 
 
   const handleLogout = () =>{
     dispatch(setLogout())
+    navigation.navigate('SignInScreen')
+
     
   }
   // const {sub , setDbUser} = useAuthContext();

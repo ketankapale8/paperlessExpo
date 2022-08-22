@@ -71,11 +71,12 @@ const styles = StyleSheet.create({
       
     },
     images :{
-      width:119,
-      height:85,
+      width:95,
+      height:55,
       marginHorizontal: 300,
+      paddingRight:60,
       marginTop:10 , 
-      borderRadius:25 
+      borderRadius:12 
       
     },
     title:{

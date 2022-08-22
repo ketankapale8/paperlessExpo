@@ -40,8 +40,8 @@ const authSlice = createSlice({
         setUser : (state , action) =>{
             state.user = action.payload;
         },
-        setLogout: async (state, action) => {
-           await AsyncStorage.clear();
+        setLogout: (state, action) => {
+            AsyncStorage.clear();
             state.user = null;
           },
     },
