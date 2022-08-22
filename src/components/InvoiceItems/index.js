@@ -1,7 +1,5 @@
 import { View, Text , Image , Pressable} from 'react-native'
-import { CartValues , POSModel } from "../../models/index.js";
-// import React from 'react';
-// import { useNavigation } from "@react-navigation/native";
+
 
 
 const InvoiceItems = ({order}) => {

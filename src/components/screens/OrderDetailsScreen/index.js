@@ -7,35 +7,37 @@ import Data from '../../Data.js'
 import Header from "./Header";
 import styles from "./styles";
 import { useRoute, useNavigation } from "@react-navigation/native";
-import { CartValues } from "../../../models/index.js";
-import { DataStore } from "aws-amplify";
+
 import { useEffect } from "react";
-import { ConsoleLogger } from "@aws-amplify/core";
+// import { ConsoleLogger } from "@aws-amplify/core";
 
 const data = Data[0];
 
 
 
-const OrderDetailsPage = () => {
+const OrderDetailsPage = ({route}) => {
+
+ 
   
   
-  const route = useRoute();
+  
+  // const route = useRoute();
+  const {item} = route.params;  
   const navigation = useNavigation();
   
   const order = route.params?.order;
+  // const item = route.params?.item;
+  // console.log('kekkeess', item)
+  // console.log('ketanData....' , item)
   // console.log(id)
 
   const onPress = () =>{
-    navigation.navigate("Details")
+    // navigation.navigate("Details")
   }
-  const [cart , setCart] = useState([])
-  const [cartData , setCartData] = useState([]);
-  let postModelId = cart.map(item=>item.posmodelID)
-  let finalCart = cart.filter(item=>item.posmodelID === order.id)
-  console.log(finalCart)
-  // console.log(cartData)
-  
-  useEffect(()=>{
+  // const [cart , setCart] = useState([])
+  // const [cartData , setCartData] = useState([]);
+
+  // useEffect(()=>{
     // if(cart.length === 0){
     //   <ActivityIndicator size={"large"} color="gray"/>
     // }
@@ -49,7 +51,7 @@ const OrderDetailsPage = () => {
     
     // })
     
-  },[])
+  // },[])
 
 
   
@@ -62,15 +64,15 @@ const OrderDetailsPage = () => {
       >
 
         <FlatList
-          ListHeaderComponent={() => <Header order={order} />}
-          data={finalCart}
+          ListHeaderComponent={() => <Header order={item} />}
+          data={order}
           renderItem={({ item }) => <DishListItem items={item} />}
           keyExtractor={(item) => item.title}
         />
 
       </Pressable>
       <Ionicons
-        onPress={() => navigation.goBack()}
+        onPress={() => navigation.navigate('Home')}
         name="arrow-back-circle"
         size={45}
         color="black"

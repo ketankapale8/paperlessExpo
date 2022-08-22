@@ -5,34 +5,46 @@ import Reliance from '../OrderList/Data/reliance1.png'
 import Dmart from '../OrderList/Data/dmart1.png'
 import BigBazaar from '../OrderList/Data/bigbazaar1.png';
 import Spencers from '../OrderList/Data/spencers.png'
+import Cantabil from '../OrderList/Data/cantabil1.jpg'
+import local from '../OnboardingImgs/local.jpg'
 
 
-const RestaurantItem = ({order}) => {
+const RestaurantItem = ({order , item}) => {
   const navigation = useNavigation();
-  // console.log(order)
+  console.log('orderrr',order)
 
   const onPress = () =>{
-    navigation.navigate("Invoices" , {order:order })
+    navigation.navigate("Invoices" , {order , item:item })
   }
+
+  console.log('homescreenss' , item?.pos?.value)
 
     // order.posmodelId === "03a8c734-a593-4d8d-b4c0-18fc19140f17" ? Reliance : '' 
     // "171361a7-9190-48ca-b5ff-aafc203c4984"
   return (
        <>
-    <Pressable onPress={onPress}>
+    <Pressable onPress={onPress}
+       style={{ flexDirection: "row", margin: 10, alignItems: "center" , paddingRight:3}}
+    >
         <View style={styles.restaurantContainer}>
-            <Image source={order.id == '03a8c734-a593-4d8d-b4c0-18fc19140f17' ? Reliance
-             : order.id == '2f702111-5917-4f94-b65a-6f0502102080' ? Dmart
-             : order.id == '4f46be92-14e7-4ef5-a38d-4176b94921da' ? BigBazaar
-             : order.id == '171361a7-9190-48ca-b5ff-aafc203c4984' ? Spencers : null}
-             style={styles.images}
-        />
-        <View>
-          <Text style={styles.title}>{order.itemName}</Text>
-          <Text style={styles.subtitle}>Bill Amount : {order.total_amt}/-</Text>
+          <View style={{flex:0.5}}>
+              <Image source={ (item?.pos?.value)  === "DMart" ? Dmart : 
+                                  (item?.pos?.value)  === "Reliance" ? Reliance :
+                                  (item?.pos?.value)  === "Spencer" ? Spencers :
+                                  (item?.pos?.value) === "BigBazaar" ? BigBazaar : 
+                                  item ||  (item.pos)  ===
+                                  null || undefined || '' ? local : null
+                                }
+              style={styles.images}
+            />
+
+          </View>
+        <View style={{flex:0.5 , marginTop:-90  , borderColor:'gray'}}>
+          <Text style={styles.title}>{item.pos ? (item?.pos?.value) : 'Local Store'}</Text>
+          <Text style={styles.subtitle}>Bill Amount : {item.amt_due}/-</Text>
           <View style={styles.rating}>
-            <Text>Date : {order.createdAt}</Text>
-        </View>
+            <Text>Purchase Date : {item.createdAt}</Text>
+          </View>
 
         </View>
         </View>
@@ -57,27 +69,33 @@ const styles = StyleSheet.create({
       borderBottomColor:'green',
       borderRadius: 20
       
-      
     },
     images :{
-      width:340,
-      height:190,
-      marginLeft:30,
-      borderRadius:20,
+      width:119,
+      height:85,
+      marginHorizontal: 300,
+      marginTop:10 , 
+      borderRadius:25 
+      
     },
     title:{
       fontSize:15,
       fontWeight:"bold",
-      marginVertical:10
+      marginVertical:10,
+      color:'black',
+      display:'flex',
+      marginBottom:10
   
     },
     subtitle:{
-      color:'gray'
+      color:'gray',
+      marginTop:0
     },
     rating:{
       display:'flex',
       alignItems:'flex-end',
-      marginTop:-41,
+      marginTop:5,
+      marginRight:'60%',
       color:'lightgray'
     }
    

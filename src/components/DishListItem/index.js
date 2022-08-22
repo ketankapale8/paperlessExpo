@@ -1,28 +1,59 @@
-import { View, Text, StyleSheet, Image, Pressable } from "react-native";
+import { View, Text, StyleSheet, Image, Pressable , Button, Alert} from "react-native";
+import { useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 
 const DishListItem = ({items}) => {
-  console.log(items)
+  const navigation = useNavigation();
+  const [addCart , setAddCart] = useState([{itemName : '' , category : '', price :'' , qty :''}])
+  const [personalCart , setPersonalCart] = useState([{itemName : '', category :'' , price :'' , qty:''}])
+
+  // const addToPersonalCart = (e) =>{
+  //   e.preventDefault();
+  //   setPersonalCart(e.target.value)
+  //   console.log('personallll')
+  //   // Alert.alert('personal cart added')
+  // }
+
+  console.log(personalCart)
+
+
+  // navigation.navigate('Invoices')
 
   // const navigation = useNavigation();
   // const route = useRoute();
   // const items = route.params?.items;
   return (
     <Pressable
-      // onPress={() => navigation.navigate("Details")}
+      onPress={(e) =>{
+        setPersonalCart({...personalCart , itemName : items.itemName ,category :items.category , price :items.price , qty:items.qty})
+        // setAddCart.push({[items.itemName , items.category , items.price ,items.qty]})
+      }
+        // setAddCart(personalCart)
+      }
+      // onPress={(e) =>addToPersonalCart(e)}
       // style={styles.container}
     >
-    <View style={styles.container}>
-      <View style={{ flex: 1 }}>
-        <Text style={styles.name}>{items.itemName}</Text>
+    <View style={styles.container} >
+      <View style={{ flex: 1 }} >
+        <Text style={styles.name} >{items.itemName}</Text>
         <Text style={styles.description} numberOfLines={2}>
           {items.category}
         </Text>
+        {/* <View> */}
+
+        {/* </View> */}
         <View style={{paddingLeft:'75%', marginTop:-50}}>
             <Text style={styles.price}>Rs {items.price} /-</Text>
             <Text style={styles.qty}> Quantity - {items.qty}</Text>
             {/* <Text style={styles.packof}> Pack -{dish.packof}</Text> */}
         </View>
+        <Pressable
+        style={styles.button}
+        >
+        <Text style={styles.buttonText}>
+          Add
+        </Text>
+      </Pressable>
       </View>
       </View >
     
@@ -54,6 +85,25 @@ const styles = StyleSheet.create({
   image: {
     height: 75,
     aspectRatio: 1,
+  },
+
+  button: {
+    backgroundColor: "gray",
+    marginTop: "auto",
+    width:50,
+    marginLeft:320,
+    borderRadius:10,
+    marginBottom:15,
+    marginTop:15,
+    padding: 10,
+    margin:5,
+    alignItems: "center",
+  },
+
+  buttonText: {
+    color: "white",
+    fontWeight: "600",
+    fontSize: 10,
   },
 });
 

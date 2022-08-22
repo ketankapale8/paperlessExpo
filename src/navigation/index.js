@@ -16,14 +16,23 @@ import ProfileScreen from '../components/screens/ProfileScreen';
 import Settings from '../components/screens/SettingsScreen/Settings';
 import CustomDrawer from '../components/CustomDrawer/CustomDrawer';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import RootStackScreen from '../components/screens/RootStackScreenn';
 import { useAuthContext } from '../contexts/AuthContext';
+import { useDispatch } from 'react-redux';
+import { useEffect } from 'react';
+import { setUser } from '../redux/features/authSlice';
 
 
 // const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator()
 
 const RootNavigator = () =>{
-    const {dbUser} = useAuthContext()
+    // const dispatch = useDispatch();
+    // const user = JSON.parse(AsyncStorage.getItem("profile"))
+    // useEffect(()=>{
+    //     dispatch(setUser(user))
+    // },[])
+    // const {dbUser} = useAuthContext()
     // const [isFirstLaunch , setisFirstLaunch] = useState(null)
     
     // useEffect(()=>{
@@ -41,11 +50,13 @@ const RootNavigator = () =>{
     return(
     <Drawer.Navigator
     drawerContent={props => <CustomDrawer {...props}/>}
-    initialRouteName="Onboarding" 
+    initialRouteName="RootStack" 
     screenOptions={{ headerShown : false}}>
         
         
-        <Drawer.Screen name='Onboarding' component={OnboardingScreens} options={{headerShown:false}}/>
+        {/* <Drawer.Screen name='Onboarding' component={OnboardingScreens} options={{headerShown:false}}/> */}
+        <Drawer.Screen name='RootStack' component={RootStackScreen} options={{headerShown:false}}/>
+
         <Drawer.Screen name='Home' component={HomeTabs}
         options={{
             drawerIcon : ({color}) => (

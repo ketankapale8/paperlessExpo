@@ -1,9 +1,9 @@
 import { View, Text, TextInput, StyleSheet, Button, Alert } from "react-native";
 import React, { useEffect, useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
-import {Auth , DataStore} from "aws-amplify"
-import { useAuthContext } from "../../../contexts/AuthContext";
-import {UserData} from '../../../models/index'
+import { useDispatch } from "react-redux";
+import {setLogout} from '../../../redux/features/authSlice'
+
 
 const Profile = () => {
   const [Name, setName] = useState("");
@@ -12,30 +12,37 @@ const Profile = () => {
   const [Email, setEmail] = useState("");
   const [AadhaarNo, setAadharNo] = useState("");
   const [Mobile, setMobileNo] = useState("");
-  const [Alternate_mob , setaltNo] = useState("")
-  const [State , setStateInIndia] = useState("")
-  const [Country , setCountry] = useState("")
+  const [Alternate_mob , setaltNo] = useState("");
+  const [State , setStateInIndia] = useState("");
+  const [Country , setCountry] = useState("");
 
-  const {sub , setDbUser} = useAuthContext();
-  console.log(sub)
+  const dispatch = useDispatch()
 
 
-  const onSave = () => {
+  const handleLogout = () =>{
+    dispatch(setLogout())
+    
+  }
+  // const {sub , setDbUser} = useAuthContext();
+  // console.log(sub)
+
+
+  // const onSave = () => { 
     // try{
-       DataStore.save(  
-          new UserData({
-            Name , 
-            Address,
-            CardNo ,
-            AadhaarNo ,
-            Email,
-            Mobile,
-            Alternate_mob,
-            State,
-            Country,
-            sub
-          })
-        );
+      //  DataStore.save(  
+      //     new UserData({
+      //       Name , 
+      //       Address,
+      //       CardNo ,
+      //       AadhaarNo ,
+      //       Email,
+      //       Mobile,
+      //       Alternate_mob,
+      //       State,
+      //       Country,
+      //       sub
+      //     })
+      //   );
         // console.log(user)
 
         // setDbUser(user)
@@ -44,10 +51,10 @@ const Profile = () => {
         //   Alert.alert("Error" , e.message)
         // }
     
-  };
+  // };
 
 
-  // const onSave = () =>{};
+  const onSave = () =>{};
 
   return (
     <View>
@@ -122,7 +129,7 @@ const Profile = () => {
 
     </SafeAreaView>
       <Button onPress={onSave} title="Save" />
-      <Text onPress={()=> Auth.signOut()} style={{textAlign:'center' , paddingTop:30 , color:'red' }}>SIGN OUT</Text>
+      <Text onPress={()=>handleLogout()} style={{textAlign:'center' , paddingTop:30 , color:'red' }}>SIGN OUT</Text>
     </View>
   );
 };
