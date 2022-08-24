@@ -23,10 +23,10 @@ const InvoiceItems = ({order}) => {
         </View>
         <View style={{flex:0.5 , marginTop:-70}}>
             <Text style={{ fontWeight: "600", fontSize: 16 , color:'black', display:'flex'}}>
-            {order.Vendortitle}
+            {order.itemName}
             </Text>
-        <Text style={{ marginVertical: 5 }}>4 items &#8226; GrandTotal :- {order.total} /-</Text>
-        <Text>2 days ago &#8226; Ref-{order.referenceId} </Text>
+        <Text style={{ marginVertical: 5 }}>4 items &#8226; Price :- {order.price} /-</Text>
+        <Text> Reference Id-{order._id} </Text>
 
         </View>
     </View>

@@ -9,15 +9,18 @@ import Cantabil from '../OrderList/Data/cantabil1.jpg'
 import local from '../OnboardingImgs/local.jpg'
 
 
-const RestaurantItem = ({order , item}) => {
+const RestaurantItem = ({order , item , token}) => {
+  
   const navigation = useNavigation();
-  console.log('orderrr',order)
+  // console.log('orderrr',order)
 
   const onPress = () =>{
-    navigation.navigate("Invoices" , {order , item:item })
+    navigation.navigate("Invoices" , {order , item :item })
   }
 
-  console.log('homescreenss' , item?.pos?.value)
+  console.log('item' ,item)
+
+  // console.log('homescreenss' , item?.pos?.value)
 
     // order.posmodelId === "03a8c734-a593-4d8d-b4c0-18fc19140f17" ? Reliance : '' 
     // "171361a7-9190-48ca-b5ff-aafc203c4984"
@@ -59,22 +62,27 @@ const styles = StyleSheet.create({
       backgroundColor: '#fff',
       alignItems: 'center',
       justifyContent: 'center',
-      padding:30
+      padding:30,
+      
     },
     restaurantContainer:{
       width:'100%',
       marginVertical:10,
       paddingTop:30,
       paddingBottom:30,
+      borderRadius: 10,
       borderBottomColor:'green',
-      borderRadius: 20
-      
+      color: "gray",
+      marginVertical: 5,
+      borderBottomColor: "lightgrey",
+     borderBottomWidth: 3,
+     flexDirection: "column",
     },
     images :{
       width:95,
-      height:55,
+      height:75,
       marginHorizontal: 300,
-      paddingRight:60,
+      marginRight:80,
       marginTop:10 , 
       borderRadius:12 
       
@@ -85,7 +93,7 @@ const styles = StyleSheet.create({
       marginVertical:10,
       color:'black',
       display:'flex',
-      marginBottom:10
+      marginBottom:10,
   
     },
     subtitle:{

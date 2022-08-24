@@ -1,20 +1,63 @@
 import { View, Text, StyleSheet, Image, Pressable , Button, Alert} from "react-native";
-import { useState } from "react";
-import { useNavigation } from "@react-navigation/native";
+import { useEffect, useState } from "react";
+import { useNavigation} from "@react-navigation/native";
+import { useDispatch , useSelector } from "react-redux";
+import { addTab } from "../../redux/features/dataSlice";
+import axios from 'react-native-axios';
+// import { setData } from "../../redux/features/datatab";
 
-const DishListItem = ({items}) => {
+const DishListItem = ({items , order}) => {
+  const {user} = useSelector((state)=>({...state.auth}))
+  const dispatch = useDispatch();
+  const {error , loading} = useSelector((state)=>({...state.auth}));
+  // console.log('nameeeee',user)
   const navigation = useNavigation();
-  const [addCart , setAddCart] = useState([{itemName : '' , category : '', price :'' , qty :''}])
-  const [personalCart , setPersonalCart] = useState([{itemName : '', category :'' , price :'' , qty:''}])
+  const [addCart , setAddCart] = useState([{ userEmail :'',itemName : '' , category : '', price :'' , qty :''}])
+  const [personalCart , setPersonalCart] = useState([]);
+
+  useEffect(()=>{
+    addDataToPersonal()
+  },[])
+
+
+  const addDataToPersonal  =  () =>{
+    const posturl = "https://paperlessapi5.herokuapp.com/users/addusercart";
+    setAddCart([{...addCart , userEmail : user?.result?.email , itemName : items.itemName ,category :items.category , price :items.price , qty:items.qty}])
+    axios.post(posturl , {
+      // addCart, 
+      userEmail : user?.result?.email , 
+      itemName : items.itemName ,
+      category :items.category , 
+      price :items.price , 
+      qty:items.qty
+    })
+
+
+
+    // if(itemName && category && price && qty){
+      // try{
+
+        //  dispatch(addTab({addCart}))
+
+      // }catch(err){
+      //   console.log(err)
+      // }
+
+    // }
+    // dispatch(setData(personalCart));
+    // console.log('addedto personal cart')
+  }
+
+ 
 
   // const addToPersonalCart = (e) =>{
-  //   e.preventDefault();
+  //   e.preventDefault();`
   //   setPersonalCart(e.target.value)
   //   console.log('personallll')
   //   // Alert.alert('personal cart added')
   // }
 
-  console.log(personalCart)
+  // console.log(personalCart)
 
 
   // navigation.navigate('Invoices')
@@ -24,12 +67,11 @@ const DishListItem = ({items}) => {
   // const items = route.params?.items;
   return (
     <Pressable
-      onPress={(e) =>{
-        setPersonalCart({...personalCart , itemName : items.itemName ,category :items.category , price :items.price , qty:items.qty})
+    onPress={()=>addDataToPersonal}
+        // setAddCart({...addCart , itemName : items.itemName ,category :items.category , price :items.price , qty:items.qty})
         // setAddCart.push({[items.itemName , items.category , items.price ,items.qty]})
-      }
         // setAddCart(personalCart)
-      }
+      
       // onPress={(e) =>addToPersonalCart(e)}
       // style={styles.container}
     >

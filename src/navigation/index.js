@@ -21,17 +21,18 @@ import { useAuthContext } from '../contexts/AuthContext';
 import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import { setUser } from '../redux/features/authSlice';
-
+import { useSelector } from "react-redux";
 
 // const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator()
 
 const RootNavigator = () =>{
-    // const dispatch = useDispatch();
+    const {user} = useSelector((state)=> ({...state.auth}))
+    const dispatch = useDispatch();
     // const user = JSON.parse(AsyncStorage.getItem("profile"))
-    // useEffect(()=>{
-    //     dispatch(setUser(user))
-    // },[])
+    useEffect(()=>{
+        dispatch(setUser(user))
+    },[])
     // const {dbUser} = useAuthContext()
     // const [isFirstLaunch , setisFirstLaunch] = useState(null)
     
@@ -49,50 +50,58 @@ const RootNavigator = () =>{
     
     return(
     <Drawer.Navigator
-    drawerContent={props => <CustomDrawer {...props}/>}
+    drawerContent={(props) => <CustomDrawer {...props}/>}
     initialRouteName="RootStack" 
     screenOptions={{ headerShown : false}}>
         
         
-        {/* <Drawer.Screen name='Onboarding' component={OnboardingScreens} options={{headerShown:false}}/> */}
-        <Drawer.Screen name='RootStack' component={RootStackScreen} options={{headerShown:false}}/>
 
-        <Drawer.Screen name='Home' component={HomeTabs}
+        { user?.result?._id ? (
+            <>
+            <Drawer.Screen name='Home' component={HomeTabs}
         options={{
             drawerIcon : ({color}) => (
                 <Ionicons name='home-outline' size={22} color={color} />
             )
-        }}
-        />
+             }}
+           />
          <Drawer.Screen name='Orders' 
         component={InvoiceScreen}
         options={{
             drawerIcon : ({color}) => (
                 <Ionicons name='ios-receipt-outline' size={22} color={color} />
-            )
-        }}
-        />
-        <Drawer.Screen name='Invoices' 
+                )
+            }}
+            />
+            <Drawer.Screen name='Invoices' 
         component={OrderDetailsPage}
-
+        
         options={{headerShown:false , drawerIcon : ({color}) => (
             <FontAwesome5 name='file-invoice-dollar' size={22} color={color} />
-        )}}
-        />
+            )}}
+            />
         <Drawer.Screen name='Details' 
         component={ItemDetailScreen}
         options={{headerShown:false , drawerIcon : ({color}) => (
             <FontAwesome5 name='receipt' size={22} color={color} />
-        )}}
+            )}}
         />
         <Drawer.Screen name='Settings' 
         component={Settings}
         options={{headerShown:false , drawerIcon : ({color}) => (
             <Ionicons name='settings' size={22} color={color} />
-        )}}
-        />
-         
-    </Drawer.Navigator>
+            )}}
+            />
+            </>
+            ) : (
+                <>
+                <Drawer.Screen name='RootStack' component={RootStackScreen} options={{headerShown:false}}/>
+                </>
+                
+                )
+            }
+                
+        </Drawer.Navigator>
     )
 };
 
@@ -104,12 +113,20 @@ const HomeTabs = () =>{
     <Tab.Navigator 
     shifting={false}
     labeled={true}
-    screenOptions={{headerShown:false}}
-    sceneAnimationEnabled={false}
+    screenOptions={{
+        headerShown:false,
+        tabBarShowLabel: false,
+        tabBarStyle: {backgroundColor: '#ffff'},
+        tabBarInactiveTintColor: '#fff',
+        tabBarActiveTintColor: 'yellow',
+    }}
+    sceneAnimationEnabled={true}
+    
     barStyle={{ 
         backgroundColor: 'white' }}
     >
-        <Tab.Screen name='Home' component={HomeScreen} options={{tabBarIcon: ()=> <Ionicons name="home" size={24} color="black"/> , headerShown:false }}/>
+        <Tab.Screen name='Home' component={HomeScreen} options={{  tabBarIcon: ()=> <Ionicons name="home" size={24} color="black"/> ,  tabBarStyle: {
+          },}}/>
         <Tab.Screen name='Orders' component={InvoiceScreen} options={{tabBarIcon: ()=> <FontAwesome5 name="file-invoice" size={24} color="black" /> }}/>
         {/* <Tab.Screen name='Invoices' component={OrderDetailsPage} options={{tabBarIcon: ()=> <FontAwesome5 name="receipt" size={24} color="black" /> }} /> */}
         {/* <Tab.Screen name='Details' component={ItemDetailScreen} options={{tabBarIcon: ()=> <FontAwesome5 name="print" size={24} color="black" /> }} /> */}

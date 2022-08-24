@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { 
     View, 
     Text, 
@@ -14,6 +14,8 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Feather from 'react-native-vector-icons/Feather';
 import { useNavigation } from '@react-navigation/native';
 import { useDispatch } from 'react-redux';
+// import {AuthContext} from '../../../contexts/AuthContext';
+import Spinner from 'react-native-loading-spinner-overlay'
 import { login } from '../../../redux/features/authSlice';
 // import {GoogleSignin } from '@react-native-google-signin/google-signin'
 
@@ -22,8 +24,9 @@ import { login } from '../../../redux/features/authSlice';
 
 
 const SignInScreen = ({navigation}) => {
-    // const navigate = useNavigation();
+    const navigate = useNavigation();
     const dispatch = useDispatch();
+
 
     const [data, setData] = React.useState({
         email: '',
@@ -33,6 +36,7 @@ const SignInScreen = ({navigation}) => {
         isValidUser: true,
         isValidPassword: true,
     });
+
 
     // const { colors } = useTheme();
 
@@ -129,6 +133,7 @@ const SignInScreen = ({navigation}) => {
 
     return (
       <View style={styles.container}>
+        {/* <Spinner visible={isLoading}/> */}
           <StatusBar backgroundColor='#009387' barStyle="light-content"/>
         <View style={styles.header}>
             <Text style={styles.text_header}>Welcome!</Text>
@@ -145,7 +150,6 @@ const SignInScreen = ({navigation}) => {
             <View style={styles.action}>
                 <FontAwesome 
                     name="user-o"
-                    
                     size={20}
                 />
                 <TextInput 

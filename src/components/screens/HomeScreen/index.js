@@ -1,8 +1,9 @@
-import { StyleSheet, FlatList, View, Text, Image, RefreshControl } from "react-native";
+import { StyleSheet, FlatList, View, Text, Image, RefreshControl , TouchableOpacity , TextInput
+,ImageBackground} from "react-native";
 import RestaurantItem from "../../RestaurantItem/index.js";
 
 import Data from "../../Data.js";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import axios from "react-native-axios";
 
@@ -10,12 +11,14 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import { SafeAreaView } from "react-native-safe-area-context";
 // import { sliderData } from "../../CarousalData.js";
+import Swiper from "react-native-swiper"
 import { windowWidth, windowHeight } from "../../utils/utils.js";
-import Swiper from "react-native-swiper";
+// import Swiper from "react-native-swiper";
 import { ScrollView } from "react-native";
+import { useNavigation } from "@react-navigation/native";
+// import {AuthContext} from '../../../contexts/AuthContext'
 
-// import { DataStore } from "aws-amplify";
-// import { Cart } from "../../../models/index.js";
+
 
 const HomeScreen = () => {
   const [name, getName] = useState("");
@@ -25,6 +28,14 @@ const HomeScreen = () => {
   const [imgActive, setImgActive] = useState(0);
   const [refreshing, setisRefreshing] = useState(false);
 
+
+  const {user} = useSelector((state)=> ({...state.auth}))
+  // console.log('loggedInuser......' , user)
+  ////
+  // const {userInfo , isLoading} = useContext(AuthContext)
+
+
+  const navigation = useNavigation()
   useEffect(() => {
     getData();
     fetchCartItems();
@@ -45,7 +56,7 @@ const HomeScreen = () => {
   };
 
   const fetchCartItems = () => {
-    const url = "https://paperlessapi.herokuapp.com/users/allcarts";
+    const url = "https://paperlessapi5.herokuapp.com/users/allcarts";
     axios.get(url).then((resp) => getFetchedData(resp.data));
     // getUserData(fetchData?.allCarts?.filter(item=>item.email === name.result.email))
   };
@@ -56,36 +67,67 @@ const HomeScreen = () => {
     setisRefreshing(false)
   };
 
+
   let items = fetchData?.allCarts?.filter(
-    (item) => item?.email === name.result?.email
+    (item) => item?.email === user?.result?.email
   );
+
+  // console.log(items)
+
+  // let items1 = fetchData?.allCarts?.filter(
+  //   (item) => item?.email === userInfo.result?.email
+  // );
+  // console.log(items1)
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: "#fff" }}>
-      <ScrollView style={{padding: 1}} 
+      {/* <ScrollView style={{padding: 1}} 
         refreshControl={
           <RefreshControl
             refreshing={false}
             onRefresh={onRefresh}
           />
         }
-      >
+      > */}
+        <View
+          style={{
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            marginBottom: 20,
+            paddingTop:10
+          }}>
+          <Text style={{fontSize: 16, fontFamily: 'Roboto-Medium'}}>
+            Hello ,{user?.result?.email}
+          </Text>
+          
+          <TouchableOpacity  onPress={() => navigation.openDrawer()}>
+            <ImageBackground
+              source={require('../../OnboardingImgs/profile.png')}
+              style={{width: 35, height: 35}}
+              imageStyle={{borderRadius: 25}}
+            />
+          </TouchableOpacity>
+        </View>
+
+
+
         <View style={styles.wrap}>
-      <Swiper style={styles.wrapper} showsButtons={true}>
-        <View style={styles.slide1}>
-          <Text style={styles.text}>Shopping from a local store</Text>
-        </View>
-        <View style={styles.slide2}>
-          <Text style={styles.text}>Search for your Order</Text>
-        </View>
-        <View style={styles.slide3}>
-          <Text style={styles.text}>Save your order on the go</Text>
-        </View>
-        <View style={styles.slide4}>
-          <Text style={styles.text}>Save Paper,Go Paperless</Text>
-        </View>
-      </Swiper>
-       </View>
+        <Swiper style={styles.wrapper} showsButtons={true}>
+          <View style={styles.slide1}>
+            <Text style={styles.text}>Shopping from a local store</Text>
+          </View>
+          <View style={styles.slide2}>
+            <Text style={styles.text}>Search for your Order</Text>
+          </View>
+          <View style={styles.slide3}>
+            <Text style={styles.text}>Save your order on the go</Text>
+          </View>
+          <View style={styles.slide4}>
+            <Text style={styles.text}>Save Paper,Go Paperless</Text>
+          </View>
+        </Swiper>
+        </View> 
+
 
       {/* {items ? (  */}
       <View style={styles.page}>
@@ -97,6 +139,12 @@ const HomeScreen = () => {
           )}
           showsVerticalScrollIndicator={false}
           keyExtractor={(item) => item.name}
+          refreshControl={
+            <RefreshControl
+              refreshing={false}
+              onRefresh={onRefresh}
+            />
+          }
           
         />
       </View>
@@ -105,7 +153,7 @@ const HomeScreen = () => {
         <Text style={{fontSize:40 , fontWeight:'200' , display:'flex' , alignContent:'center' , paddingTop:'50px', marginTop:'50px'}}>No Cart Items</Text>
       </View> */}
       {/* ) } */}
-      </ScrollView>
+      {/* </ScrollView> */}
     </SafeAreaView>
   );
 };

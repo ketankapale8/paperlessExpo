@@ -133,7 +133,7 @@ const Profile = () => {
 
     </SafeAreaView>
       <Button onPress={onSave} title="Save" />
-      <Text onPress={()=>handleLogout()} style={{textAlign:'center' , paddingTop:30 , color:'red' }}>SIGN OUT</Text>
+      <Text onPress={handleLogout} style={{textAlign:'center' , paddingTop:30 , color:'red' }}>SIGN OUT</Text>
     </View>
   );
 };

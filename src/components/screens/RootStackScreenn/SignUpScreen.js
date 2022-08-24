@@ -17,11 +17,14 @@ import * as Animatable from 'react-native-animatable';
 // import LinearGradient from 'react-native-linear-gradient';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Feather from 'react-native-vector-icons/Feather';
-import { register } from '../../../redux/features/authSlice';
+// import { register } from '../../../redux/features/authSlice';
 import { useDispatch } from 'react-redux';
+
+// import {AuthContext} from '../../../contexts/AuthContext'
 
 const SignUpScreen = ({navigation}) => {
     const dispatch = useDispatch();
+    // const {isLoading, register} = useContext(AuthContext);
 
     const [data, setData] = React.useState({
         firstName : '',
@@ -96,6 +99,7 @@ const SignUpScreen = ({navigation}) => {
             // e.preventDefault();
             if(email && password && firstName && lastName){
                return dispatch(register({data, navigation}))
+                // register(email , password , firstName ,lastName)
             }
             }
 
@@ -108,6 +112,7 @@ const SignUpScreen = ({navigation}) => {
 
     return (
       <View style={styles.container}>
+        {/* <Spinner visible={isLoading} /> */}
           <StatusBar backgroundColor='#009387' barStyle="light-content"/>
         <View style={styles.header}>
             <Text style={styles.text_header}>Register Now!</Text>

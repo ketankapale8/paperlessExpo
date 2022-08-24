@@ -3,27 +3,26 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View , FlatList , Image} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native'
 import RootNavigator from './src/navigation';
-import {Provider} from 'react-redux'
+import {Provider} from 'react-redux';
 import store from './src/redux/store';
 import {useDispatch} from 'react-redux';
 import { useEffect } from 'react';
-
+// import {AuthProvider} from './src/contexts/AuthContext'
 
 
 
 function App() {
 
-
   return (
     <Provider store={store}>
     <NavigationContainer>
-      {/* <AuthContextProvider> */}
         <RootNavigator/>
         <StatusBar style='light'/>
-      {/* </AuthContextProvider> */}
     </NavigationContainer>
     </Provider>
   );
 }
 
 export default App;
+
+{/* <Provider store={store}></Provider> */}  ///commented code for Provider
