@@ -2,12 +2,14 @@ import { View, Text , Image , Pressable} from 'react-native'
 
 
 
-const InvoiceItems = ({order}) => {
+const InvoiceItems = ({order , totalAmt}) => {
   console.log(order)
+  // console.log(total)
   
 //   const navigation = useNavigation();
 
   return (
+    <View>
     <Pressable
     // onPress={() => navigation.navigate("Order", { id: order.id })}
     style={{ flexDirection: "row", margin: 10, alignItems: "center" , paddingRight:5}}
@@ -22,15 +24,23 @@ const InvoiceItems = ({order}) => {
 
         </View>
         <View style={{flex:0.5 , marginTop:-70}}>
-            <Text style={{ fontWeight: "600", fontSize: 16 , color:'black', display:'flex'}}>
+            <Text style={{ fontWeight: "600", fontSize: 26 , color:'black', display:'flex'}}>
             {order.itemName}
             </Text>
-        <Text style={{ marginVertical: 5 }}>4 items &#8226; Price :- {order.price} /-</Text>
+        <Text style={{ marginVertical: 5 }}> {order.category}</Text>
+        <Text style={{ marginVertical: 5 }}> Price: {order.price} Rs</Text>
+        
+
         <Text> Reference Id-{order._id} </Text>
 
         </View>
     </View>
+
+
   </Pressable>
+
+  
+  </View>
     
   )
 }

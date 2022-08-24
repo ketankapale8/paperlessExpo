@@ -28,7 +28,12 @@ const InvoiceScreen = () => {
 
 
 
+  // let finalTotal = cartData?.allCarts?.price.reduce((total,acc)=>total+=acc,0)
+  // console.log(finalTotal)
   console.log('cc',cartData)
+
+ let totalAmt = cartData?.allCarts?.map(item=>((item.price)).split(',').map(Number).reduce((total,acc)=>total+=acc,0)).reduce((total,acc)=>total+=acc,0)
+
 
   // console.log('cardamndhajkdhajkdhakd ',cartData)
 
@@ -43,12 +48,15 @@ const InvoiceScreen = () => {
         <Text style={{fontSize:50 , paddingLeft:70}}>Personal Tabs</Text>
     </View>
     <View style={{ flex: 1, width: "100%", paddingTop: 50 }}>
-      <Pressable onPress={()=> navigation.navigate("Details")} >
+      <Pressable onPress={()=> navigation.navigate("")} >
         <FlatList
           data={cartData.allCarts}
-          renderItem={({ item }) => <InvoiceItems order={item} />}
+          renderItem={({ item }) => <InvoiceItems order={item} totalAmt={totalAmt} />}
         />
       </Pressable>
+        <View>
+          <Text>{totalAmt}</Text>
+        </View>
       <Ionicons
         onPress={() => navigation.navigate('Home')}
         name="arrow-back-circle"
