@@ -1,21 +1,23 @@
-import { View, Text, TextInput, StyleSheet, Button, Alert } from "react-native";
+import { View, Text, TextInput, StyleSheet, Alert, ScrollView } from "react-native";
 import React, { useEffect, useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { useDispatch } from "react-redux";
+import { useDispatch , useSelector} from "react-redux";
 import {setLogout} from '../../../redux/features/authSlice'
 import { useNavigation } from "@react-navigation/native";
-
+import COLORS from "../../Molecules/colors";
+import Button from "../../Molecules/Button";
+import axios from 'react-native-axios'
 
 const Profile = () => {
-  const [Name, setName] = useState("");
-  const [Address, setAddress] = useState("");
-  const [CardNo, setCardNO] = useState("");
-  const [Email, setEmail] = useState("");
-  const [AadhaarNo, setAadharNo] = useState("");
-  const [Mobile, setMobileNo] = useState("");
-  const [Alternate_mob , setaltNo] = useState("");
-  const [State , setStateInIndia] = useState("");
-  const [Country , setCountry] = useState("");
+  const [name, setName] = useState("");
+  const [address, setAddress] = useState("");
+  // const [CardNo, setCardNO] = useState("");
+  const [email, setEmail] = useState("");
+  const [aadhaar, setAadharNo] = useState("");
+  const [mob, setMobileNo] = useState("");
+  const [alt_mob , setaltNo] = useState("");
+  const [state , setStateInIndia] = useState("");
+  const [country , setCountry] = useState("");
 
   const dispatch = useDispatch()
   const navigation = useNavigation();
@@ -27,6 +29,30 @@ const Profile = () => {
 
     
   }
+
+  useEffect(()=>{
+    updateUser()
+
+  },[])
+
+  const {user} = useSelector((state) => ({...state.auth}))
+  let id = user?.result?._id
+
+  const updateUser = () =>{
+    const url ="http://localhost:5000/users/update"
+    axios.put(`${url}/${id}`, {
+      name,
+      email,
+      address,
+      aadhaar,
+      mob,
+      alt_mob,
+      state,
+      country
+    })
+      
+  }
+  // console.log(user)
   // const {sub , setDbUser} = useAuthContext();
   // console.log(sub)
 
@@ -58,47 +84,47 @@ const Profile = () => {
   // };
 
 
-  const onSave = () =>{};
 
   return (
     <View>
-    <SafeAreaView>
+    <SafeAreaView >
+      {/* <ScrollView > */}
       <Text style={styles.title}>Profile</Text>
       <TextInput
-        value={Name}
+        value={name}
         onChangeText={setName}
         placeholder="Name"
         style={styles.input}
       />
       <TextInput
-        value={Address}
+        value={address}
         onChangeText={setAddress}
         placeholder="Address"
         style={styles.input}
       />
 
       <TextInput
-        value={State}
+        value={state}
         onChangeText={setStateInIndia}
         placeholder="State"
         style={styles.input}
       />
        <TextInput
-        value={Country}
+        value={country}
         onChangeText={setCountry}
         placeholder="Country"
         style={styles.input}
       />
-      <TextInput
+      {/* <TextInput
         value={CardNo}
         onChangeText={setCardNO}
         placeholder="Card No"
         style={styles.input}
         keyboardType="numeric"
-      />
+      /> */}
 
       <TextInput
-        value={Email}
+        value={email}
         onChangeText={setEmail}
         placeholder="Email Address"
         style={styles.input}
@@ -106,7 +132,7 @@ const Profile = () => {
 
       />
       <TextInput
-        value={AadhaarNo}
+        value={aadhaar}
         onChangeText={setAadharNo}
         placeholder="Aadhaar Number"
         style={styles.input}
@@ -114,7 +140,7 @@ const Profile = () => {
 
       />
       <TextInput
-        value={Mobile}
+        value={mob}
         onChangeText={setMobileNo}
         placeholder="Mobile Number"
         style={styles.input}
@@ -123,17 +149,26 @@ const Profile = () => {
       />
 
      <TextInput
-        value={Alternate_mob}
+        value={alt_mob}
         onChangeText={setaltNo}
         placeholder="Alternate Number"
         style={styles.input}
         keyboardType="numeric"
 
       />
+      <Button onPress={updateUser} title="UPDATE" 
+        style={{
+          color: COLORS.black,
+          fontWeight: 'bold',
+          textAlign: 'center',
+          fontSize: 12,
+        }}
+        />
 
-    </SafeAreaView>
-      <Button onPress={onSave} title="Save" />
+  
       <Text onPress={handleLogout} style={{textAlign:'center' , paddingTop:30 , color:'red' }}>SIGN OUT</Text>
+        {/* </ScrollView> */}
+      </SafeAreaView>
     </View>
   );
 };

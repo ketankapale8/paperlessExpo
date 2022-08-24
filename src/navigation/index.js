@@ -1,7 +1,6 @@
 import 'react-native-gesture-handler';
 // import React { useEffect , useState } from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {createMaterialBottomTabNavigator} from '@react-navigation/material-bottom-tabs';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs'
 import { Ionicons } from '@expo/vector-icons';
 import { FontAwesome5 } from '@expo/vector-icons';
@@ -116,14 +115,14 @@ const HomeTabs = () =>{
     screenOptions={{
         headerShown:false,
         tabBarShowLabel: false,
-        tabBarStyle: {backgroundColor: '#ffff'},
-        tabBarInactiveTintColor: '#fff',
+        // tabBarStyle: {backgroundColor: 'lightgrey'},
+        tabBarInactiveTintColor: 'black',
         tabBarActiveTintColor: 'yellow',
     }}
     sceneAnimationEnabled={true}
     
     barStyle={{ 
-        backgroundColor: 'white' }}
+        backgroundColor: '#fffff' }}
     >
         <Tab.Screen name='Home' component={HomeScreen} options={{  tabBarIcon: ()=> <Ionicons name="home" size={24} color="black"/> ,  tabBarStyle: {
           },}}/>
