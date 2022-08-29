@@ -1,7 +1,7 @@
 import 'react-native-gesture-handler';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View , FlatList , Image} from 'react-native';
-import {NavigationContainer} from '@react-navigation/native'
+import {NavigationContainer ,DefaultTheme} from '@react-navigation/native'
 import RootNavigator from './src/navigation';
 import {Provider} from 'react-redux';
 import store from './src/redux/store';
@@ -9,13 +9,19 @@ import {useDispatch} from 'react-redux';
 import { useEffect } from 'react';
 // import {AuthProvider} from './src/contexts/AuthContext'
 
-
+const theme = {
+  ...DefaultTheme,
+  color :{
+    ...DefaultTheme.colors,
+    border : "transparent"
+  }
+}
 
 function App() {
 
   return (
     <Provider store={store}>
-    <NavigationContainer>
+    <NavigationContainer theme={theme}>
         <RootNavigator/>
         <StatusBar style='light'/>
     </NavigationContainer>

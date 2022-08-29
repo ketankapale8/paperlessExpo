@@ -34,7 +34,7 @@ const InvoiceScreen = () => {
 
 
   const getCartItems = () =>{
-    const url = "https://paperlessapi5.herokuapp.com/users/getallusercart";
+    const url = "https://paperlessapi7.herokuapp.com/users/getallusercart";
     axios.get(url)
     .then(resp=>{
       setcartData(resp.data)
@@ -54,12 +54,12 @@ const InvoiceScreen = () => {
   // console.log(finalTotal)
   // console.log('cc',cartData)
 
- let totalAmt = cartData?.allCarts?.map(item=>((item.price)).split(',').map(Number).reduce((total,acc)=>total+=acc,0)).reduce((total,acc)=>total+=acc,0)
+ let totalAmt = cartData?.allCarts?.filter((items) => items?.userEmail === user?.result?.email).map(item=>((item.price)).split(',').map(Number).reduce((total,acc)=>total+=acc,0)).reduce((total,acc)=>total+=acc,0)
 
 
   // console.log('cardamndhajkdhajkdhakd ',cartData)
 
-  // let cartItems = cartData?.allCarts?.filter((items) => items?.userEmail === user?.result?.email)
+  let cartItems = cartData?.allCarts?.filter((items) => items?.userEmail === user?.result?.email)
   // console.log(cartItems)
 
   // console.log(cartItems.filter(item=>item.price))
@@ -72,7 +72,7 @@ const InvoiceScreen = () => {
     <View style={{ flex: 1, width: "100%", paddingTop: 20 }}>
       <Pressable  >
         <FlatList
-          data={cartData.allCarts}
+          data={cartItems}
           renderItem={({ item }) => <InvoiceItems order={item} totalAmt={totalAmt} />}
           refreshControl={
             <RefreshControl

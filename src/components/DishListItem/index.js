@@ -21,7 +21,7 @@ const DishListItem = ({items , order}) => {
 
 
   const addDataToPersonal  =  () =>{
-    const posturl = "https://paperlessapi5.herokuapp.com/users/addusercart";
+    const posturl = "https://paperlessapi7.herokuapp.com/users/addusercart";
     setAddCart([{...addCart , userEmail : user?.result?.email , itemName : items.itemName ,category :items.category , price :items.price , qty:items.qty}])
     axios.post(posturl , {
       // addCart, 
@@ -32,20 +32,6 @@ const DishListItem = ({items , order}) => {
       qty:items.qty
     })
 
-
-
-    // if(itemName && category && price && qty){
-      // try{
-
-        //  dispatch(addTab({addCart}))
-
-      // }catch(err){
-      //   console.log(err)
-      // }
-
-    // }
-    // dispatch(setData(personalCart));
-    // console.log('addedto personal cart')
   }
 
  

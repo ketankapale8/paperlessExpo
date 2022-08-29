@@ -7,7 +7,7 @@ import DishListItem from "../../DishListItem/index";
 import Header from "./Header";
 import styles from "./styles";
 import { useRoute, useNavigation } from "@react-navigation/native";
-import {AuthContext} from '../../../contexts/AuthContext'
+// import {AuthContext} from '../../../contexts/AuthContext'
 
 import { useEffect } from "react";
 // import { ConsoleLogger } from "@aws-amplify/core";

@@ -5,8 +5,9 @@ import Reliance from '../OrderList/Data/reliance1.png'
 import Dmart from '../OrderList/Data/dmart1.png'
 import BigBazaar from '../OrderList/Data/bigbazaar1.png';
 import Spencers from '../OrderList/Data/spencers.png'
-import Cantabil from '../OrderList/Data/cantabil1.jpg'
-import local from '../OnboardingImgs/local.jpg'
+import Cantabil from '../OrderList/Data/cantabil1.jpg';
+import local from '../OnboardingImgs/local.jpg';
+import {COLORS , FONTS , SIZES ,  icons} from '../../../constants'
 
 
 const RestaurantItem = ({order , item , token}) => {
@@ -27,7 +28,13 @@ const RestaurantItem = ({order , item , token}) => {
   return (
        <>
     <Pressable onPress={onPress}
-       style={{ flexDirection: "row", margin: 10, alignItems: "center" , paddingRight:3}}
+       style={{ 
+        flexDirection: "row", 
+        margin: 10, 
+        alignItems: "center" , 
+        paddingRight:3
+      
+      }}
     >
         <View style={styles.restaurantContainer}>
           <View style={{flex:0.5}}>
@@ -43,10 +50,10 @@ const RestaurantItem = ({order , item , token}) => {
 
           </View>
         <View style={{flex:0.5 , marginTop:-90  , borderColor:'gray'}}>
-          <Text style={styles.title}>{item.pos ? (item?.pos?.value) : 'Local Store'}</Text>
-          <Text style={styles.subtitle}>Bill Amount : {item.amt_due}/-</Text>
-          <View style={styles.rating}>
-            <Text>Purchase Date : {item.createdAt}</Text>
+          <Text style={{color: COLORS.primary, ...FONTS.h2}}>{item.pos ? (item?.pos?.value) : 'Local Store'}</Text>
+          <Text style={{color: COLORS.darkgray, ...FONTS.h3}}>Bill Amount : {item.amt_due}/-</Text>
+          <View style={{color: COLORS.primary, ...FONTS.h4}}>
+            <Text style={{color: COLORS.darkgray, ...FONTS.h4}}>Purchase Date : {item.createdAt}</Text>
           </View>
 
         </View>
@@ -79,7 +86,7 @@ const styles = StyleSheet.create({
      flexDirection: "column",
     },
     images :{
-      width:95,
+      width:109,
       height:75,
       marginHorizontal: 300,
       marginRight:80,

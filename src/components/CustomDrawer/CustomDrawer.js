@@ -95,7 +95,7 @@ const CustomDrawer = (props) => {
                 style={{height:60 , width:60 , borderRadius:40 , marginTop:10 , marginLeft:55}}
               />
               <Text style={{paddingTop:20, paddingLeft:20, fontSize:12}}>{(user?.result?.email) ? (user.result.email) : ''}</Text>
-              <Text style={{paddingTop:20, paddingLeft:30, fontSize:12}}>Order Count : 20</Text>
+              {/* <Text style={{paddingTop:20, paddingLeft:30, fontSize:12}}>Order Count : 20</Text> */}
           </ImageBackground>
           <DrawerItemList style={{padding:30}} {...props}/>
       </DrawerContentScrollView>

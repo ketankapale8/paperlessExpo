@@ -39,7 +39,7 @@ const Profile = () => {
   let id = user?.result?._id
 
   const updateUser = () =>{
-    const url ="http://localhost:5000/users/update"
+    const url ="https://paperlessapi7.herokuapp.com/users/update"
     axios.put(`${url}/${id}`, {
       name,
       email,

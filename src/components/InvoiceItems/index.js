@@ -1,4 +1,5 @@
 import { View, Text , Image , Pressable , Button} from 'react-native'
+import {icons} from '../../../constants'
 
 
 
@@ -9,6 +10,9 @@ const InvoiceItems = ({order , totalAmt}) => {
 //   const navigation = useNavigation();
 
   return (
+    <View>
+    {/* {order.length>0 ?  ( */}
+      <>
     <View style={{marginBottom:20}}>
     <Pressable
     // onPress={() => navigation.navigate("Order", { id: order.id })}
@@ -18,8 +22,13 @@ const InvoiceItems = ({order , totalAmt}) => {
     <View style={{display:'flex', flexDirection:'column' , flex:1 , paddingRight:5}}>
         <View style={{flex:0.5}}>
             <Image
-                source={order.image}
-                style={{ width: 119, height: 75, marginHorizontal: 300 , marginTop:30 , borderRadius:20}}
+                source={order.category == "Groceries" ? icons.groceries 
+                : order.category == "Beverages" ? icons.drinks 
+                : order.category == "Fruits" ? icons.fruit 
+                : order.category == "Shoes" ? icons.shoes 
+                : icons.shopping
+              }
+                style={{ width: 89, height: 90, marginHorizontal: 300 , marginTop:30 }}
             />
 
         </View>
@@ -35,11 +44,17 @@ const InvoiceItems = ({order , totalAmt}) => {
 
         </View>
     </View>
-
-
    </Pressable>
-
-  
+  </View>
+     </>
+     {/* ):( */}
+      <>
+    {/* <View>
+          <Text>No Data added to personal Cart</Text>
+    </View> */}
+    </>
+    {/* ) */}
+{/* } */}
   </View>
     
   )

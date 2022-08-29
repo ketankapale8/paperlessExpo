@@ -17,13 +17,15 @@ import * as Animatable from 'react-native-animatable';
 // import LinearGradient from 'react-native-linear-gradient';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Feather from 'react-native-vector-icons/Feather';
-// import { register } from '../../../redux/features/authSlice';
-import { useDispatch } from 'react-redux';
+import { register } from '../../../redux/features/authSlice';
+import { useDispatch , useSelector } from 'react-redux';
+import { useNavigation } from '@react-navigation/native';
 
 // import {AuthContext} from '../../../contexts/AuthContext'
 
 const SignUpScreen = ({navigation}) => {
     const dispatch = useDispatch();
+    const navigate = useNavigation();
     // const {isLoading, register} = useContext(AuthContext);
 
     const [data, setData] = React.useState({
@@ -88,26 +90,26 @@ const SignUpScreen = ({navigation}) => {
             confirm_secureTextEntry: !data.confirm_secureTextEntry
         });
     }
-
+    
     const handleSubmit = () =>{
         try{
             const {email , password , firstName , lastName , confirm_password} = data;
             if (password !== confirm_password) {
                 // return Toast.error("Password should match")
-               return Alert.alert("Password should match");
-            }{
-            // e.preventDefault();
+                return Alert.alert("Password should match");
+            }
             if(email && password && firstName && lastName){
-               return dispatch(register({data, navigation}))
+                dispatch(register({data ,navigation}))
                 // register(email , password , firstName ,lastName)
             }
-            }
+            // }
+            // console.warn('presssrddf')
 
         }catch(err){
             console.log(err)
         }
         // console.log(firstName)
-        console.warn('signup button clicked')
+        // console.warn('signup button clicked')
     }
 
     return (
@@ -175,7 +177,7 @@ const SignUpScreen = ({navigation}) => {
                 : null}
             </View>
 
-            <Text style={styles.text_footer}>Username</Text>
+            <Text style={styles.text_footer}>Email</Text>
             <View style={styles.action}>
                 <FontAwesome 
                     name="user-o"
@@ -183,7 +185,7 @@ const SignUpScreen = ({navigation}) => {
                     size={20}
                 />
                 <TextInput 
-                    placeholder="Your Username"
+                    placeholder="Your Email"
                     style={styles.textInput}
                     autoCapitalize="none"
                     onChangeText={(val) => textInputChange(val)}
@@ -280,12 +282,12 @@ const SignUpScreen = ({navigation}) => {
             </View>
             <View style={styles.button}>
                 <TouchableOpacity
+                    onPress={handleSubmit}
                      style={[styles.signIn, {
                         borderColor: '#009387',
                         borderWidth: 1,
                         marginTop: 15
                     }]}
-                    onPress={()=> handleSubmit()}
                 >
                     <Text style={[styles.textSign, {
                         color:'#009387'

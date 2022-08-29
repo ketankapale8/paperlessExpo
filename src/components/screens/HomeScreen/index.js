@@ -1,11 +1,13 @@
 import { StyleSheet, FlatList, View, Text, Image, RefreshControl , TouchableOpacity , TextInput
 ,ImageBackground} from "react-native";
 import RestaurantItem from "../../RestaurantItem/index.js";
+import {COLORS , FONTS , SIZES ,  icons} from '../../../../constants'
 
 import Data from "../../Data.js";
 import { useContext, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import axios from "react-native-axios";
+// import {COLORS , FONTS , SIZES ,  icons} from '../../../../constants'
 
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
@@ -56,7 +58,7 @@ const HomeScreen = () => {
   };
 
   const fetchCartItems = () => {
-    const url = "https://paperlessapi5.herokuapp.com/users/allcarts";
+    const url = "https://paperlessapi7.herokuapp.com/users/allcarts";
     axios.get(url).then((resp) => getFetchedData(resp.data));
     // getUserData(fetchData?.allCarts?.filter(item=>item.email === name.result.email))
   };
@@ -96,7 +98,7 @@ const HomeScreen = () => {
             marginBottom: 20,
             paddingTop:10
           }}>
-          <Text style={{fontSize: 16, fontFamily: 'Roboto-Medium'}}>
+          <Text style={{color: COLORS.primary, ...FONTS.h3 }}>
             Hello ,{user?.result?.email}
           </Text>
           
@@ -128,7 +130,7 @@ const HomeScreen = () => {
         </Swiper>
         </View> 
 
-
+      
       {/* {items ? (  */}
       <View style={styles.page}>
         {/* <Text style={{fontSize:50 , paddingLeft:130 , paddingTop:50}}>Home</Text> */}
@@ -144,7 +146,10 @@ const HomeScreen = () => {
               refreshing={false}
               onRefresh={onRefresh}
             />
+            
           }
+
+          
           
         />
       </View>
@@ -161,7 +166,22 @@ const HomeScreen = () => {
 const styles = StyleSheet.create({
   page: {
     padding: 10,
-    backgroundColor: "light-gray",
+    // backgroundColor: "light-gray",
+    flex:1,
+    flexDirection:'row',
+    // margin:0,
+    // paddingVertical:SIZES.radius,
+    // paddingHorizontal:SIZES.padding,
+    // borderRadius:5 ,
+    // shadowColor: "#0000",
+    // shadowOffset:{
+    //  width:2,
+    //  height:2
+    // },
+    // shadowOpacity : 0.25,
+    // shadowRadius: 3.84,
+    // elevation : 3
+
   },
   wrap: {
     width: windowWidth,
@@ -216,6 +236,16 @@ const styles = StyleSheet.create({
     fontSize: 30,
     fontWeight: "bold",
   },
+  shadow:{
+    shadowColor: "#0000",
+    shadowOffset:{
+     width:2,
+     height:2
+    },
+    shadowOpacity : 0.25,
+    shadowRadius: 3.84,
+    elevation : 3
+ }
 });
 
 export default HomeScreen;

@@ -30,7 +30,7 @@ const SplashScreen = ({navigation}) => {
             animation="fadeInUpBig"
         >
             <Text style={styles.title}>Order anything. Keep it recorded!</Text>
-            <Text style={styles.text}>Login to get connected</Text>
+            {/* <Text style={styles.text}>Login to get connected</Text> */}
             <View style={styles.button}>
             <TouchableOpacity onPress={()=>navigation.navigate('SignInScreen')}
             >

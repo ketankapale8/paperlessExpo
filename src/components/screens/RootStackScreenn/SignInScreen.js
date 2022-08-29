@@ -15,7 +15,7 @@ import Feather from 'react-native-vector-icons/Feather';
 import { useNavigation } from '@react-navigation/native';
 import { useDispatch } from 'react-redux';
 // import {AuthContext} from '../../../contexts/AuthContext';
-import Spinner from 'react-native-loading-spinner-overlay'
+// import Spinner from 'react-native-loading-spinner-overlay'
 import { login } from '../../../redux/features/authSlice';
 // import {GoogleSignin } from '@react-native-google-signin/google-signin'
 

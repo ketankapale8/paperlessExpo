@@ -1,13 +1,13 @@
 {
   "expo": {
-    "name": "paper",
+    "name": "Paperless",
     "slug": "paper",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/paperless.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/paperless.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -21,13 +21,19 @@
       "supportsTablet": true
     },
     "android": {
+      "package": "paperlessapp.prod",
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "foregroundImage": "./assets/paperless.png",
         "backgroundColor": "#FFFFFF"
       }
     },
     "web": {
-      "favicon": "./assets/favicon.png"
+      "favicon": "./assets/paperless.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "fb930a15-cf3d-4fa2-9048-619c784cef0a"
+      }
     }
   }
 }

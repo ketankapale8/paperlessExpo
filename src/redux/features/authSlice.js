@@ -1,7 +1,9 @@
 import {createSlice ,createAsyncThunk} from '@reduxjs/toolkit';
 import * as API from '../api'
 import AsyncStorage from '@react-native-async-storage/async-storage';
-export const login = createAsyncThunk("auth/login" , async({data , navigation} , { rejectWithValue })=>{
+
+export const login = createAsyncThunk(
+    "auth/login" , async({data , navigation} , { rejectWithValue })=>{
     
     try{
         const response = await API.signIn(data);
@@ -16,19 +18,20 @@ export const login = createAsyncThunk("auth/login" , async({data , navigation} ,
 })
 
 export const register = createAsyncThunk(
-    "auth/register",
-    async ({ data, navigation }, { rejectWithValue }) => {
-      try {
+    "auth/register" ,  async({data , navigation} , { rejectWithValue })=>{
+    
+    try{
         const response = await API.signUp(data);
+        console.log("register successfully");
         navigation.navigate("SignInScreen");
+        console.log(response.data)
         return response.data;
-      } catch (err) {
+
+    }catch(err){
         return rejectWithValue(err.response.data);
-      }
+        console.log(err.response.data)
     }
-  );
-
-
+})
 
 
 const authSlice = createSlice({
@@ -63,7 +66,6 @@ const authSlice = createSlice({
             state.loading = false;
             state.error = action.payload.message
         },
-        /// register
 
         [register.pending] : (state , action) =>{
             state.loading = true;
@@ -71,7 +73,7 @@ const authSlice = createSlice({
         },
         [register.fulfilled] :  (state , action) =>{
             state.loading = false;
-            AsyncStorage.setItem("@profile" ,JSON.stringify(...action.payload))
+            AsyncStorage.setItem("@profile" ,JSON.stringify({...action.payload}))
             state.user = action.payload
         },
         [register.rejected] : (state ,action) =>{

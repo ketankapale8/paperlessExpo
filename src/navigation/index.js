@@ -12,7 +12,7 @@ import ItemDetailScreen from '../components/screens/ItemDetailScreen';
 import OrderDetailsPage from '../components/screens/OrderDetailsScreen';
 import OnboardingScreens from '../components/screens/OnboardingScreen';
 import ProfileScreen from '../components/screens/ProfileScreen';
-import Settings from '../components/screens/SettingsScreen/Settings';
+import TrackerScreen from '../components/screens/TrackerScreen/Expenses';
 import CustomDrawer from '../components/CustomDrawer/CustomDrawer';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import RootStackScreen from '../components/screens/RootStackScreenn';
@@ -21,6 +21,7 @@ import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import { setUser } from '../redux/features/authSlice';
 import { useSelector } from "react-redux";
+import {COLORS , FONTS , SIZES ,  icons} from '../../constants'
 
 // const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator()
@@ -53,8 +54,6 @@ const RootNavigator = () =>{
     initialRouteName="RootStack" 
     screenOptions={{ headerShown : false}}>
         
-        
-
         { user?.result?._id ? (
             <>
             <Drawer.Screen name='Home' component={HomeTabs}
@@ -79,16 +78,16 @@ const RootNavigator = () =>{
             <FontAwesome5 name='file-invoice-dollar' size={22} color={color} />
             )}}
             />
-        <Drawer.Screen name='Details' 
+        {/* <Drawer.Screen name='Details' 
         component={ItemDetailScreen}
         options={{headerShown:false , drawerIcon : ({color}) => (
             <FontAwesome5 name='receipt' size={22} color={color} />
             )}}
-        />
-        <Drawer.Screen name='Settings' 
-        component={Settings}
+        /> */}
+        <Drawer.Screen name='Tracker' 
+        component={TrackerScreen}
         options={{headerShown:false , drawerIcon : ({color}) => (
-            <Ionicons name='settings' size={22} color={color} />
+            <Ionicons name='stats-chart' size={22} color={color} />
             )}}
             />
             </>
@@ -114,22 +113,22 @@ const HomeTabs = () =>{
     labeled={true}
     screenOptions={{
         headerShown:false,
-        tabBarShowLabel: false,
-        // tabBarStyle: {backgroundColor: 'lightgrey'},
-        tabBarInactiveTintColor: 'black',
-        tabBarActiveTintColor: 'yellow',
+        tabBarShowLabel: true,
+        tabBarStyle: {backgroundColor: COLORS.lightGray2},
+        tabBarInactiveTintColor: COLORS.gray,
+        tabBarActiveTintColor: COLORS.black,
     }}
     sceneAnimationEnabled={true}
     
     barStyle={{ 
         backgroundColor: '#fffff' }}
     >
-        <Tab.Screen name='Home' component={HomeScreen} options={{  tabBarIcon: ()=> <Ionicons name="home" size={24} color="black"/> ,  tabBarStyle: {
+        <Tab.Screen name='Home' component={HomeScreen} options={{  tabBarIcon: ()=> <Ionicons name="home" size={24} color={COLORS.primary}/> ,  tabBarStyle: {
           },}}/>
-        <Tab.Screen name='Orders' component={InvoiceScreen} options={{tabBarIcon: ()=> <FontAwesome5 name="file-invoice" size={24} color="black" /> }}/>
-        {/* <Tab.Screen name='Invoices' component={OrderDetailsPage} options={{tabBarIcon: ()=> <FontAwesome5 name="receipt" size={24} color="black" /> }} /> */}
+        <Tab.Screen name='Orders' component={InvoiceScreen} options={{tabBarIcon: ()=> <FontAwesome5 name="file-invoice" size={24} color={COLORS.primary} /> }}/>
+        <Tab.Screen name='Tracker' component={TrackerScreen} options={{tabBarIcon: ()=> <Ionicons name="stats-chart" size={24} color={COLORS.primary} /> }} />
         {/* <Tab.Screen name='Details' component={ItemDetailScreen} options={{tabBarIcon: ()=> <FontAwesome5 name="print" size={24} color="black" /> }} /> */}
-        <Tab.Screen name='Profile' component={ProfileScreen} options={{tabBarIcon: ()=> <MaterialCommunityIcons name="face-man-profile" size={24} color="black" /> }} />
+        <Tab.Screen name='Profile' component={ProfileScreen} options={{tabBarIcon: ()=> <MaterialCommunityIcons name="face-man-profile" size={24} color={COLORS.primary} /> }} />
     </Tab.Navigator>
     )
 }
