@@ -87,7 +87,7 @@ const RootNavigator = () =>{
         <Drawer.Screen name='Tracker' 
         component={TrackerScreen}
         options={{headerShown:false , drawerIcon : ({color}) => (
-            <Ionicons name='stats-chart' size={22} color={color} />
+            <Ionicons name='analytics' size={22} color={color} />
             )}}
             />
             </>

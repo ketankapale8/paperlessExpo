@@ -7,6 +7,8 @@ import {Provider} from 'react-redux';
 import store from './src/redux/store';
 import {useDispatch} from 'react-redux';
 import { useEffect } from 'react';
+import {useFonts} from "expo-font"
+
 // import {AuthProvider} from './src/contexts/AuthContext'
 
 const theme = {
@@ -18,6 +20,16 @@ const theme = {
 }
 
 function App() {
+  const [fontsLoaded] = useFonts({
+    'Roboto-Light': require('./assets/fonts/Roboto-Light.ttf'),
+  });
+
+  if (!fontsLoaded) {
+    return null;
+  }
+
+
+
 
   return (
     <Provider store={store}>

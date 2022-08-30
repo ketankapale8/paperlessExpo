@@ -1,5 +1,5 @@
 import { View, Text , Image , Pressable , Button} from 'react-native'
-import {icons} from '../../../constants'
+import {COLORS , FONTS, icons} from '../../../constants'
 
 
 
@@ -10,7 +10,10 @@ const InvoiceItems = ({order , totalAmt}) => {
 //   const navigation = useNavigation();
 
   return (
-    <View>
+    <View 
+   
+    
+    >
     {/* {order.length>0 ?  ( */}
       <>
     <View style={{marginBottom:20}}>
@@ -19,7 +22,15 @@ const InvoiceItems = ({order , totalAmt}) => {
     style={{ flexDirection: "row", margin: 10, alignItems: "center" , paddingRight:5 , marginHorizontal:20 , marginVertical:10 , paddingBottom:30}}
   >
 
-    <View style={{display:'flex', flexDirection:'column' , flex:1 , paddingRight:5}}>
+    <View style={{display:'flex', flexDirection:'column' , flex:1 , paddingRight:5,
+      padding: 10,
+      backgroundColor: COLORS.lightGray,
+      flexDirection: 'row',
+      elevation: 12,
+      borderRadius: 6,
+      marginVertical: 0,
+          
+  }}>
         <View style={{flex:0.5}}>
             <Image
                 source={order.category == "Groceries" ? icons.groceries 
@@ -28,19 +39,17 @@ const InvoiceItems = ({order , totalAmt}) => {
                 : order.category == "Shoes" ? icons.shoes 
                 : icons.shopping
               }
-                style={{ width: 89, height: 90, marginHorizontal: 300 , marginTop:30 }}
+                style={{ width: 99, height: 99 , marginHorizontal: 250 , marginBottom:-30 }}
             />
 
         </View>
-        <View style={{flex:0.5 , marginTop:-70}}>
-            <Text style={{ fontWeight: "600", fontSize: 26 , color:'black', display:'flex'}}>
+        <View style={{flex:0.5 , marginTop:5 , marginVertical:0 , marginHorizontal:-250 , marginRight:120}}>
+            <Text style={{ fontWeight: "450", fontSize: 22 , color:COLORS.primary}}>
             {order.itemName}
             </Text>
-        <Text style={{ marginVertical: 5 }}> {order.category}</Text>
-        <Text style={{ marginVertical: 5 }}> Price: {order.price} Rs</Text>
-        
-
-        <Text> Reference Id-{order._id} </Text>
+        <Text style={{ marginVertical: 5 , color:COLORS.darkgray , marginHorizontal:-2}}> {order.category}</Text>
+        <Text style={{ marginVertical: 5 , marginHorizontal:-2 , color:COLORS.darkgray}}> Price: {order.price} Rs</Text>
+        <Text style={{ marginVertical: 5 , marginHorizontal:-2 , ...FONTS.h4 , color:COLORS.darkgray , fontWeight:'100'}}> Ref:-{order._id}</Text>
 
         </View>
     </View>

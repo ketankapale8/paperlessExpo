@@ -14,7 +14,7 @@ export const sports_icon = require("../assets/icons/sports_icon.png");
 export const up_arrow = require("../assets/icons/up_arrow.png");
 export const groceries = require("../assets/icons/shopping-bag.png");
 export const shopping = require("../assets/icons/shopping-cart.png");
-export const drinks = require("../assets/icons/drinks.png")
+export const drinks = require("../assets/icons/food_icon.png")
 export const shoes = require("../assets/icons/running-shoes.png")
 export const fruit = require("../assets/icons/fruit1.png")
 
