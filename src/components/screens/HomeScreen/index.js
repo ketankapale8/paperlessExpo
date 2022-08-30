@@ -169,19 +169,7 @@ const styles = StyleSheet.create({
     // backgroundColor: "light-gray",
     flex:1,
     flexDirection:'row',
-    // margin:0,
-    // paddingVertical:SIZES.radius,
-    // paddingHorizontal:SIZES.padding,
-    // borderRadius:5 ,
-    // shadowColor: "#0000",
-    // shadowOffset:{
-    //  width:2,
-    //  height:2
-    // },
-    // shadowOpacity : 0.25,
-    // shadowRadius: 3.84,
-    // elevation : 3
-
+ 
   },
   wrap: {
     width: windowWidth,

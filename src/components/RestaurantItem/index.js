@@ -49,7 +49,7 @@ const RestaurantItem = ({order , item , token}) => {
             />
 
           </View>
-        <View style={{flex:0.5 , marginTop:-90  , borderColor:'gray'}}>
+        <View style={{flex:0.5 , marginTop:2  , borderColor:'gray', marginHorizontal:-250 , marginRight:100}}>
           <Text style={{color: COLORS.primary, ...FONTS.h2}}>{item.pos ? (item?.pos?.value) : 'Local Store'}</Text>
           <Text style={{color: COLORS.darkgray, ...FONTS.h3}}>Bill Amount : {item.amt_due}/-</Text>
           <View style={{color: COLORS.primary, ...FONTS.h4}}>
@@ -77,19 +77,28 @@ const styles = StyleSheet.create({
       marginVertical:10,
       paddingTop:30,
       paddingBottom:30,
-      borderRadius: 10,
-      borderBottomColor:'green',
-      color: "gray",
-      marginVertical: 5,
-      borderBottomColor: "lightgrey",
-     borderBottomWidth: 3,
-     flexDirection: "column",
+
+      backgroundColor: COLORS.lightGray,
+      flexDirection: 'row',
+      elevation: 12,
+      borderRadius: 6,
+      marginVertical: 0,
+
+
+
+    //   borderRadius: 10,
+    //   borderBottomColor:'green',
+      // color: "gray",
+    //   marginVertical: 5,
+      // borderBottomColor: "lightgrey",
+    //  borderBottomWidth: 3,
+    //  flexDirection: "column",
     },
     images :{
       width:109,
       height:75,
-      marginHorizontal: 300,
-      marginRight:80,
+      marginHorizontal: 270,
+      marginRight:90,
       marginTop:10 , 
       borderRadius:12 
       
