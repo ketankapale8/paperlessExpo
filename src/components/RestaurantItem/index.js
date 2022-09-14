@@ -32,7 +32,8 @@ const RestaurantItem = ({order , item , token}) => {
         flexDirection: "row", 
         margin: 10, 
         alignItems: "center" , 
-        paddingRight:3
+        paddingRight:3,
+
       
       }}
     >
@@ -49,11 +50,11 @@ const RestaurantItem = ({order , item , token}) => {
             />
 
           </View>
-        <View style={{flex:0.5 , marginTop:2  , borderColor:'gray', marginHorizontal:-250 , marginRight:100}}>
+        <View style={{flex:0.5 , marginTop:-10  , borderColor:'gray', marginHorizontal:-250 , marginRight:100}}>
           <Text style={{color: COLORS.primary, ...FONTS.h2}}>{item.pos ? (item?.pos?.value) : 'Local Store'}</Text>
           <Text style={{color: COLORS.darkgray, ...FONTS.h3}}>Bill Amount : {item.amt_due}/-</Text>
-          <View style={{color: COLORS.primary, ...FONTS.h4}}>
-            <Text style={{color: COLORS.darkgray, ...FONTS.h4}}>Purchase Date : {item.createdAt}</Text>
+          <View style={{color: COLORS.primary}}>
+            <Text style={{color: COLORS.darkgray, fontWeight:'120'}}>Date : {item.createdAt}</Text>
           </View>
 
         </View>
@@ -82,7 +83,7 @@ const styles = StyleSheet.create({
       flexDirection: 'row',
       elevation: 12,
       borderRadius: 6,
-      marginVertical: 0,
+      marginVertical: 5,
 
 
 
@@ -99,7 +100,7 @@ const styles = StyleSheet.create({
       height:75,
       marginHorizontal: 270,
       marginRight:90,
-      marginTop:10 , 
+      marginTop:0 , 
       borderRadius:12 
       
     },

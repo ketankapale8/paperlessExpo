@@ -12,6 +12,7 @@ import ItemDetailScreen from '../components/screens/ItemDetailScreen';
 import OrderDetailsPage from '../components/screens/OrderDetailsScreen';
 import OnboardingScreens from '../components/screens/OnboardingScreen';
 import ProfileScreen from '../components/screens/ProfileScreen';
+import BotScreen from '../components/screens/BotScreen'
 import TrackerScreen from '../components/screens/TrackerScreen/Expenses';
 import CustomDrawer from '../components/CustomDrawer/CustomDrawer';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -129,6 +130,8 @@ const HomeTabs = () =>{
         <Tab.Screen name='Tracker' component={TrackerScreen} options={{tabBarIcon: ()=> <Ionicons name="stats-chart" size={24} color={COLORS.primary} /> }} />
         {/* <Tab.Screen name='Details' component={ItemDetailScreen} options={{tabBarIcon: ()=> <FontAwesome5 name="print" size={24} color="black" /> }} /> */}
         <Tab.Screen name='Profile' component={ProfileScreen} options={{tabBarIcon: ()=> <MaterialCommunityIcons name="face-man-profile" size={24} color={COLORS.primary} /> }} />
+        <Tab.Screen name='Paperbot' component={BotScreen} options={{tabBarIcon: ()=> <MaterialCommunityIcons name="robot" size={24} color={COLORS.primary} /> }} />
+
     </Tab.Navigator>
     )
 }

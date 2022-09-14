@@ -28,7 +28,8 @@ const InvoiceItems = ({order , totalAmt}) => {
       flexDirection: 'row',
       elevation: 12,
       borderRadius: 6,
-      marginVertical: 0,
+      marginVertical: -10,
+      marginTop:20
           
   }}>
         <View style={{flex:0.5}}>

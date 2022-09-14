@@ -311,12 +311,12 @@ const Expenses = ({}) => {
       })
 
       let finalChartData = userInfo?.map(item=>{
-        let percentage = parseInt(item.price/totalAmt * 100)
+        let percentage = parseInt(item?.price/totalAmt * 100)
         return {
           label : `${percentage}%`,
-          y : Number(item.price),
+          y : Number(item?.price),
           expenceCount : userInfo?.length,
-          name : item.itemName
+          name : item?.itemName
         }
       })
 
