@@ -30,6 +30,7 @@
     "web": {
       "favicon": "./assets/paperless.png"
     },
+
     "extra": {
       "eas": {
         "projectId": "fb930a15-cf3d-4fa2-9048-619c784cef0a"

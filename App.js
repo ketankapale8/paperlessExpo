@@ -8,6 +8,7 @@ import store from './src/redux/store';
 import {useDispatch} from 'react-redux';
 import { useEffect } from 'react';
 import {useFonts} from "expo-font"
+// import styles from './src/components/screens/OrderDetailsScreen/styles';
 
 // import {AuthProvider} from './src/contexts/AuthContext'
 
@@ -22,6 +23,7 @@ const theme = {
 function App() {
   const [fontsLoaded] = useFonts({
     'Roboto-Light': require('./assets/fonts/Roboto-Light.ttf'),
+    // 'Roboto-Bold' : require('./assets/fonts/Roboto-Bold.ttf')
   });
 
   if (!fontsLoaded) {
@@ -33,13 +35,17 @@ function App() {
 
   return (
     <Provider store={store}>
-    <NavigationContainer theme={theme}>
+    <NavigationContainer theme={theme} style={styles.container}>
         <RootNavigator/>
         <StatusBar style='light'/>
     </NavigationContainer>
     </Provider>
   );
 }
+
+const styles = StyleSheet.create({
+  fontFamily : 'Roboto-Light'
+})
 
 export default App;
 
