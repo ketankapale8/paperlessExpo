@@ -22,7 +22,7 @@ const Expenses = ({}) => {
   const [showMoretoggle , setShowMoreToggle] = useState(false)
 
   const getCartItems = () =>{
-    const url = "https://paperlessapi7.herokuapp.com/users/getallusercart";
+    const url = "https://paperlessapi8.herokuapp.com/users/getallusercart";
     axios.get(url)
     .then(resp=>{
       setuserData(resp.data)
@@ -313,7 +313,7 @@ const Expenses = ({}) => {
       let finalChartData = userInfo?.map(item=>{
         let percentage = parseInt(item?.price/totalAmt * 100)
         return {
-          label : `${percentage}%`,
+          label : '.',
           y : Number(item?.price),
           expenceCount : userInfo?.length,
           name : item?.itemName

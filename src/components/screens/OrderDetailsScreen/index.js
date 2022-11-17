@@ -47,7 +47,7 @@ const OrderDetailsPage = ({}) => {
 
       </Pressable>
       <Ionicons
-        onPress={() => navigation.navigate('Home')}
+        onPress={() => navigation.goBack()}
         name="arrow-back-circle"
         size={45}
         color="black"

@@ -1,7 +1,9 @@
 import { StyleSheet, FlatList, View, Text, Image, RefreshControl , TouchableOpacity , TextInput
 ,ImageBackground} from "react-native";
 import RestaurantItem from "../../RestaurantItem/index.js";
-import {COLORS , FONTS , SIZES ,  icons} from '../../../../constants'
+import {COLORS , FONTS , SIZES ,  icons} from '../../../../constants';
+
+
 
 import Data from "../../Data.js";
 import { useContext, useEffect, useState } from "react";
@@ -18,6 +20,9 @@ import { windowWidth, windowHeight } from "../../utils/utils.js";
 // import Swiper from "react-native-swiper";
 import { ScrollView } from "react-native";
 import { useNavigation } from "@react-navigation/native";
+import DiscountContainer from "../../DiscountContainer/index.js";
+import DiscountSwiper from "../../DiscountContainer/DiscountSwiper.js";
+import ServicesContainer from "../../ServicesContainer/index.js";
 // import {AuthContext} from '../../../contexts/AuthContext'
 
 
@@ -29,6 +34,8 @@ const HomeScreen = () => {
   const [userData, getUserData] = useState([]);
   const [imgActive, setImgActive] = useState(0);
   const [refreshing, setisRefreshing] = useState(false);
+  const [viewMode , currentViewMode] = useState("chart");
+  const [currentView , setCurrent] = useState('Discounts');
 
 
   const {user} = useSelector((state)=> ({...state.auth}))
@@ -46,6 +53,72 @@ const HomeScreen = () => {
     // customUserData();
   }, []);
 
+  function renderCategoryHeader(){
+    return(
+      <View style={{flexDirection:'row', padding:SIZES.padding , justifyContent:'space-between', alignItems:'center'}}>
+       <View>
+          <Text style={{color:COLORS.primary, ...FONTS.h3}}>{viewMode == "chart" ? currentView.toUpperCase() : "RECENT ORDERS"}</Text>
+
+       </View>
+       <View style={{flexDirection:'row'}}>
+        <TouchableOpacity
+          style={{
+            alignContent:"center",
+            justifyContent:'center',
+            height:50, 
+            width:50,
+            backgroundColor: viewMode == "chart" ? COLORS.secondary : null,
+            borderRadius:25
+          }}
+
+          onPress={()=> currentViewMode("chart")}
+        >  
+          <Image
+            source={icons.chart}
+            resizeMode="contain"
+            style={{
+              width:20,
+              height:20,
+              marginHorizontal:15,
+              justifyContent:'center',
+              alignItems:'center',
+              tintColor : viewMode == "chart" ? COLORS.white : COLORS.darkgray
+              // backgroundColor: COLORS.secondary 
+            }}
+          />
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          style={{
+            alignContent:"center",
+            justifyContent:'center',
+            height:50,
+            width:50,
+            borderRadius:25,
+            backgroundColor: viewMode == "list" ? COLORS.secondary : null,
+
+          }}
+
+          onPress={()=> currentViewMode("list")}
+        >  
+          <Image
+            source={icons.menu}
+            resizeMode="contain"
+            style={{
+              width:30,
+              height:25,
+              marginHorizontal:10,
+              justifyContent:'center',
+              alignItems:'center',
+              tintColor : viewMode == "list" ? COLORS.white : COLORS.darkgray              // backgroundColor:COLORS.secondary 
+            }}
+          />
+        </TouchableOpacity>
+       </View>
+      </View>
+    )
+  }
+
   const getData = async () => {
     try {
       await AsyncStorage.getItem("@profile").then((resp) => {
@@ -58,7 +131,7 @@ const HomeScreen = () => {
   };
 
   const fetchCartItems = () => {
-    const url = "https://paperlessapi7.herokuapp.com/users/allcarts";
+    const url = "https://paperlessapi8.herokuapp.com/users/allcarts";
     axios.get(url).then((resp) => getFetchedData(resp.data));
     // getUserData(fetchData?.allCarts?.filter(item=>item.email === name.result.email))
   };
@@ -74,12 +147,7 @@ const HomeScreen = () => {
     (item) => item?.email === user?.result?.email
   );
 
-  // console.log(items)
-
-  // let items1 = fetchData?.allCarts?.filter(
-  //   (item) => item?.email === userInfo.result?.email
-  // );
-  // console.log(items1)
+  
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: "#fff" }}>
@@ -111,10 +179,11 @@ const HomeScreen = () => {
           </TouchableOpacity>
         </View>
 
-
-
-        <View style={styles.wrap}>
-        <Swiper style={styles.wrapper} showsButtons={true}>
+        {/* <View style={styles.wrap}>
+        <Swiper style={styles.wrapper}
+          autoplay
+          horizontal={false}
+        showsButtons={false}>
           <View style={styles.slide1}>
             <Text style={styles.text}>Shopping from a local store</Text>
           </View>
@@ -128,37 +197,47 @@ const HomeScreen = () => {
             <Text style={styles.text}>Save Paper,Go Paperless</Text>
           </View>
         </Swiper>
-        </View> 
-
-      
-      {/* {items ? (  */}
-      <View style={styles.page}>
-        {/* <Text style={{fontSize:50 , paddingLeft:130 , paddingTop:50}}>Home</Text> */}
-        <FlatList
-          data={items}
-          renderItem={({ item }) => (
-            <RestaurantItem order={item.invoiceData} item={item} />
-          )}
-          showsVerticalScrollIndicator={false}
-          keyExtractor={(item) => item.name}
-          refreshControl={
-            <RefreshControl
-              refreshing={false}
-              onRefresh={onRefresh}
+        </View>  */}
+        <View>
+          <ServicesContainer/>
+        </View>
+        <View style={{width:'96%' , marginLeft:'5%', marginRight:'5%', height:90}}>
+          {renderCategoryHeader()}
+        </View>
+        
+        <ScrollView contentContainerStyle={{paddingBottom: 60}}>
+        {
+           
+            viewMode == "list" &&
+          <View style={styles.page}>
+            {/* <Text style={{fontSize:50 , paddingLeft:130 , paddingTop:50}}>Home</Text> */}
+            <FlatList
+              data={items}
+              renderItem={({ item }) => (
+                <RestaurantItem order={item.invoiceData} item={item} />
+              )}
+              showsVerticalScrollIndicator={false}
+              keyExtractor={(item) => item.name}
+              refreshControl={
+                <RefreshControl
+                  refreshing={false}
+                  onRefresh={onRefresh}
+                />
+                
+              }
             />
-            
-          }
+          </View>
+           
+        }{
+          viewMode == "chart" &&
+          <View>
+            <DiscountContainer/>
+          </View>
+        }
 
-          
-          
-        />
-      </View>
-      {/* ) :  ( */}
-      {/* <View>
-        <Text style={{fontSize:40 , fontWeight:'200' , display:'flex' , alignContent:'center' , paddingTop:'50px', marginTop:'50px'}}>No Cart Items</Text>
-      </View> */}
-      {/* ) } */}
-      {/* </ScrollView> */}
+      </ScrollView>
+    
+      
     </SafeAreaView>
   );
 };
@@ -166,6 +245,7 @@ const HomeScreen = () => {
 const styles = StyleSheet.create({
   page: {
     padding: 10,
+    marginVertical:20,
     // backgroundColor: "light-gray",
     flex:1,
     flexDirection:'row',
@@ -173,7 +253,7 @@ const styles = StyleSheet.create({
   },
   wrap: {
     width: windowWidth,
-    height: windowHeight * 0.35,
+    height: windowHeight * 0.25,
   
   },
   wrapper: {

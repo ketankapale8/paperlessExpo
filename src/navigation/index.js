@@ -25,6 +25,7 @@ import { useEffect } from "react";
 import { setUser } from "../redux/features/authSlice";
 import { useSelector } from "react-redux";
 import { COLORS, FONTS, SIZES, icons } from "../../constants";
+import ServicesScreen from "../components/screens/ServicesScreen";
 
 // const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -36,25 +37,19 @@ const RootNavigator = () => {
   useEffect(() => {
     dispatch(setUser(user));
   }, []);
-  // const {dbUser} = useAuthContext()
-  // const [isFirstLaunch , setisFirstLaunch] = useState(null)
-
-  // useEffect(()=>{
-  //     AsyncStorage.getItem('alreadyLaunched').then(value=>{
-  //         if(value == null){
-  //             AsyncStorage.setItem('alreadyLaunched' , 'true');
-  //             setisFirstLaunch(true)
-  //         }else{
-  //             setisFirstLaunch(false)
-  //         }
-  //     })
-  // }, [])
 
   return (
     <Drawer.Navigator
       drawerContent={(props) => <CustomDrawer {...props} />}
       initialRouteName="RootStack"
-      screenOptions={{ headerShown: false }}
+      screenOptions={{ headerShown: false , headerStyle :{ backgroundColor : '#fff', 
+      shadowColor:'#ffff',
+    elevation : 0} ,
+      headerTintColor : '#333',
+      headerTitleStyle :{
+        fontWeight :'bold'
+      }
+    }}
     >
       {user?.result?._id ? (
         <>
@@ -102,7 +97,7 @@ const RootNavigator = () => {
             }}
           />
 
-          <Drawer.Screen
+          {/* <Drawer.Screen
             name="Camera"
             component={CameraScreen}
             options={{
@@ -111,7 +106,7 @@ const RootNavigator = () => {
                 <Ionicons name="analytics" size={22} color={color} />
               ),
             }}
-          />
+          /> */}
         </>
       ) : (
         <>
@@ -147,15 +142,16 @@ const HomeTabs = () => {
     >
       <Tab.Screen
         name="Home"
-        component={HomeScreen}
+        component={HomeStackScreen}
         options={{
+          tabBarLabel: 'Home',
           tabBarIcon: () => (
             <Ionicons name="home" size={24} color={COLORS.primary} />
           ),
           tabBarStyle: {},
         }}
       />
-      <Tab.Screen
+      {/* <Tab.Screen
         name="Orders"
         component={InvoiceScreen}
         options={{
@@ -167,16 +163,8 @@ const HomeTabs = () => {
             />
           ),
         }}
-      />
-      <Tab.Screen
-        name="Tracker"
-        component={TrackerScreen}
-        options={{
-          tabBarIcon: () => (
-            <Ionicons name="stats-chart" size={24} color={COLORS.primary} />
-          ),
-        }}
-      />
+      /> */}
+      
       {/* <Tab.Screen name='Details' component={ItemDetailScreen} options={{tabBarIcon: ()=> <FontAwesome5 name="print" size={24} color="black" /> }} /> */}
       <Tab.Screen
         name="Profile"
@@ -193,6 +181,16 @@ const HomeTabs = () => {
       />
 
 <Tab.Screen
+        name="Tracker"
+        component={TrackerScreen}
+        options={{
+          tabBarIcon: () => (
+            <Ionicons name="stats-chart" size={24} color={COLORS.primary} />
+          ),
+        }}
+      />
+
+{/* <Tab.Screen
         name="Analysis"
         component={AnalysisScreen}
         options={{
@@ -204,7 +202,7 @@ const HomeTabs = () => {
             />
           ),
         }}
-      />
+      /> */}
 
       
       <Tab.Screen
@@ -226,13 +224,29 @@ const HomeTabs = () => {
 
 const HomeStack = createNativeStackNavigator();
 
-const HomeStackNavigator = () => {
+const HomeStackScreen = ({navigation}) => {
   return (
-    <HomeStack.Navigator>
-      <HomeStack.Screen name="Orders" component={InvoiceScreen} />
-      <HomeStack.Screen name="Invoices" component={OrderDetailsPage} />
+    <HomeStack.Navigator
+    screenOptions={{
+      headerShown: false,
+      tabBarShowLabel: true,
+      tabBarStyle: { backgroundColor: COLORS.lightGray2 },
+      tabBarInactiveTintColor: COLORS.gray,
+      tabBarActiveTintColor: COLORS.black,
+    }}
+    sceneAnimationEnabled={true}
+    >
+      <HomeStack.Screen name="Home" component={HomeScreen} />
+      <HomeStack.Screen name="Services" component={ServicesScreen}
+        options={({route}) => ({
+          // title: route.params.title,
+          headerBackTitleVisible: false
+        })}
+      
+      />
+      {/* <HomeStack.Screen name="Invoices" component={OrderDetailsPage} />
       <HomeStack.Screen name="Details" component={ItemDetailScreen} />
-      <HomeStack.Screen name="Profile" component={ProfileScreen} />
+      <HomeStack.Screen name="Profile" component={ProfileScreen} /> */}
     </HomeStack.Navigator>
   );
 };

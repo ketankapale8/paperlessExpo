@@ -1,4 +1,4 @@
-import { View, Text, ImageBackground , Image} from 'react-native'
+import { View, Text, ImageBackground , Image, StyleSheet} from 'react-native'
 import React, { useState , useEffect} from 'react';
 import { Ionicons } from '@expo/vector-icons';
 import {DrawerContentScrollView,DrawerItemList} from '@react-navigation/drawer'
@@ -40,6 +40,21 @@ const CustomDrawer = (props) => {
     dispatched(setLogout())
     navigation.navigate('SignInScreen')
   }
+
+  // const myCustomShare = async() => {
+  //   const shareOptions = {
+  //     message: 'Get all your orders on Paperless App. Earn rewards and loyalty points on the fly. Download the app!',
+  //     // url: files.appLogo,
+  //     // urls: [files.image1, files.image2]
+  //   }
+
+  //   try {
+  //     const ShareResponse = await Share.open(shareOptions);
+  //     // console.log(JSON.stringify(ShareResponse));
+  //   } catch(error) {
+  //     console.log('Error => ', error);
+  //   }
+  // };
 
 
   // console.log(login.result.name)
@@ -99,6 +114,14 @@ const CustomDrawer = (props) => {
           </ImageBackground>
           <DrawerItemList style={{padding:30}} {...props}/>
       </DrawerContentScrollView>
+      <View style={styles.menuWrapper}>
+      {/* <TouchableRipple onPress={() =>{}}>
+          <View style={styles.menuItem}>
+            <Icon name="share-outline" color="#FF6347" size={25}/>
+            <Text style={styles.menuItemText}>Tell Your Friends</Text>
+          </View>
+        </TouchableRipple> */}
+      </View>
       <View style={{padding:20 , borderTopWidth:1 , borderTopColor:'#ccc'}}>
           <TouchableOpacity onPress={()=>{}} style={{paddingVertical:15}}>
               <View style={{display:'flex', flexDirection:'row'}}>
@@ -112,3 +135,9 @@ const CustomDrawer = (props) => {
 }
 
 export default CustomDrawer
+
+const styles = StyleSheet.create({
+  menuWrapper: {
+    marginTop: 10,
+  },
+})

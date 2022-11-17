@@ -117,7 +117,7 @@ const SignUpScreen = ({navigation}) => {
         {/* <Spinner visible={isLoading} /> */}
           <StatusBar backgroundColor='#009387' barStyle="light-content"/>
         <View style={styles.header}>
-            <Text style={styles.text_header}>Register Now!</Text>
+            <Text style={styles.text_header}>Sign Up</Text>
         </View>
         <Animatable.View 
             animation="fadeInUpBig"

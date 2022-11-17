@@ -34,7 +34,7 @@ const InvoiceScreen = () => {
 
 
   const getCartItems = () =>{
-    const url = "https://paperlessapi7.herokuapp.com/users/getallusercart";
+    const url = "https://paperlessapi8.herokuapp.com/users/getallusercart";
     axios.get(url)
     .then(resp=>{
       setcartData(resp.data)

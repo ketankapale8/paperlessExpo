@@ -19,7 +19,7 @@ const RestaurantItem = ({order , item , token}) => {
     navigation.navigate("Invoices" , {order , item :item })
   }
 
-  console.log('item' ,item)
+  // console.log('item' ,item)
 
   // console.log('homescreenss' , item?.pos?.value)
 
@@ -39,10 +39,10 @@ const RestaurantItem = ({order , item , token}) => {
     >
         <View style={styles.restaurantContainer}>
           <View style={{flex:0.5}}>
-              <Image source={ (item?.pos?.value)  === "DMart" ? Dmart : 
-                                  (item?.pos?.value)  === "Reliance" ? Reliance :
-                                  (item?.pos?.value)  === "Spencer" ? Spencers :
-                                  (item?.pos?.value) === "BigBazaar" ? BigBazaar : 
+              <Image source={ (item?.pos)  === "DMart" ? Dmart : 
+                                  (item?.pos)  === "Reliance" ? Reliance :
+                                  (item?.pos)  === "Spencer" ? Spencers :
+                                  (item?.pos) === "BigBazaar" ? BigBazaar : 
                                   item ||  (item.pos)  ===
                                   null || undefined || '' ? local : null
                                 }
@@ -51,7 +51,7 @@ const RestaurantItem = ({order , item , token}) => {
 
           </View>
         <View style={{flex:0.5 , marginTop:-10  , borderColor:'gray', marginHorizontal:-250 , marginRight:100}}>
-          <Text style={{color: COLORS.primary, ...FONTS.h2}}>{item.pos ? (item?.pos?.value) : 'Local Store'}</Text>
+          <Text style={{color: COLORS.primary, ...FONTS.h2}}>{item.pos ? (item?.pos) : 'Local Store'}</Text>
           <Text style={{color: COLORS.darkgray, ...FONTS.h3}}>Bill Amount : {item.amt_due}/-</Text>
           <View style={{color: COLORS.primary}}>
             <Text style={{color: COLORS.darkgray, fontWeight:'120'}}>Date : {item.createdAt}</Text>
@@ -75,25 +75,20 @@ const styles = StyleSheet.create({
     },
     restaurantContainer:{
       width:'100%',
+      backgroundColor: '#fff',
       marginVertical:10,
       paddingTop:30,
       paddingBottom:30,
+      shadowColor: '#999',
+      shadowOffset: {width: 0, height: 1},
 
       backgroundColor: COLORS.lightGray,
       flexDirection: 'row',
+      shadowOpacity: 0.8,
+      shadowRadius: 2,
       elevation: 12,
       borderRadius: 6,
       marginVertical: 5,
-
-
-
-    //   borderRadius: 10,
-    //   borderBottomColor:'green',
-      // color: "gray",
-    //   marginVertical: 5,
-      // borderBottomColor: "lightgrey",
-    //  borderBottomWidth: 3,
-    //  flexDirection: "column",
     },
     images :{
       width:109,
