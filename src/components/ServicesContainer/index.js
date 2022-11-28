@@ -72,7 +72,7 @@ const ServicesContainer = ({}) => {
           <Text style={styles.categoryBtnTxt}>Categories</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.categoryBtn} onPress={() => {
-          // navigation.navigate("Services", { title: "Categories" })
+          navigation.navigate("Orders", )
         }}>
           <View style={styles.categoryIcon}>
             <Entypo name="shopping-cart" size={25} color="#FF6347" />

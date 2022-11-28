@@ -4,8 +4,10 @@ import  {DiscountData}  from './discount';
 import { windowWidth, windowHeight } from "../../components/utils/utils.js";
 import { useState } from 'react';
 import {COLORS , FONTS , SIZES ,  icons} from '../../../constants'
+import { useNavigation } from '@react-navigation/native';
 
 const DiscountContainer = () => {
+    const navigation = useNavigation();
     const [disc , getDisc] = useState(DiscountData)
     
 //  const renderItems = ({item}) =>{
@@ -38,11 +40,22 @@ const DiscountContainer = () => {
         renderItem={({item})=>(
             <TouchableOpacity
             >
-          <View style={styles.subContainer}>
-            <View style={styles.panel}>
+          <View style={styles.subContainer}
+            // onPress={()=> navigation.navigate('DiscountScreen' , {item: item})}
+          >
+            <View style={styles.panel} 
+            >
+               
+                    
+                
                 <View style={styles.brandText}>
+                    <TouchableOpacity
+                        onPress={()=> navigation.navigate('DiscountScreen' , {item: item.brandName})}
+                    >
                         <Text style={styles.discountTitle}>{item.title}</Text>
                         <Text style={styles.discountDesc}>{item.desc}</Text>
+
+                    </TouchableOpacity>
                 </View>
                 <View style={styles.brandImg}>
                     <Image source={item.img} style={styles.img}/>

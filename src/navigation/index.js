@@ -26,6 +26,7 @@ import { setUser } from "../redux/features/authSlice";
 import { useSelector } from "react-redux";
 import { COLORS, FONTS, SIZES, icons } from "../../constants";
 import ServicesScreen from "../components/screens/ServicesScreen";
+import DiscountScreen from "../components/screens/DiscountScreen";
 
 // const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -244,6 +245,8 @@ const HomeStackScreen = ({navigation}) => {
         })}
       
       />
+      <HomeStack.Screen name="DiscountScreen" component={DiscountScreen} />
+
       {/* <HomeStack.Screen name="Invoices" component={OrderDetailsPage} />
       <HomeStack.Screen name="Details" component={ItemDetailScreen} />
       <HomeStack.Screen name="Profile" component={ProfileScreen} /> */}

@@ -166,15 +166,15 @@ const HomeScreen = () => {
             marginBottom: 20,
             paddingTop:10
           }}>
-          <Text style={{color: COLORS.primary, ...FONTS.h3 }}>
-            Hello ,{user?.result?.email}
+          <Text style={{color: COLORS.primary, ...FONTS.h2 , marginLeft:50 }}>
+               Hello , {user?.result?.name}
           </Text>
           
           <TouchableOpacity  onPress={() => navigation.openDrawer()}>
             <ImageBackground
               source={require('../../OnboardingImgs/profile.png')}
-              style={{width: 35, height: 35}}
-              imageStyle={{borderRadius: 25}}
+              style={{width: 35, height: 35,marginRight:20}}
+              imageStyle={{borderRadius: 25 }}
             />
           </TouchableOpacity>
         </View>

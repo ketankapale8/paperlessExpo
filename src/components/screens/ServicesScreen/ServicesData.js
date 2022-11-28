@@ -56,6 +56,6 @@ export const Categories = [
     // image: Images[0].image,
     image: categories,
     rating: 4,
-    categories: ['Food', 'Electronics', 'Dailyneeds'],
+    categories: ['Electronics', 'Dailyneeds' ],
     }
 ];

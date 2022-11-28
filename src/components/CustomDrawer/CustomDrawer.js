@@ -1,5 +1,12 @@
-import { View, Text, ImageBackground , Image, StyleSheet} from 'react-native'
+import { View, Text, ImageBackground , Image, StyleSheet} from 'react-native';
+import {
+  Avatar,
+  Title,
+  Caption,
+  TouchableRipple,
+} from 'react-native-paper';
 import React, { useState , useEffect} from 'react';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { Ionicons } from '@expo/vector-icons';
 import {DrawerContentScrollView,DrawerItemList} from '@react-navigation/drawer'
 import { TouchableOpacity } from 'react-native-gesture-handler';
@@ -8,12 +15,14 @@ import { useNavigation } from '@react-navigation/native';
 import AsyncStorage  from '@react-native-async-storage/async-storage'
 import { setLogout } from '../../redux/features/authSlice';
 import { useSelector , useDispatch } from 'react-redux';
+import * as Sharing from 'expo-sharing';
 
 const CustomDrawer = (props) => {
   const dispatched = useDispatch();
   const navigation = useNavigation();
     const [name , getName] = useState([]);
     const {user} = useSelector((state)=> ({...state.auth}))
+    console.log(user)
     
     // const [login ,setloginResponse] = useState([])
     useEffect(()=>{
@@ -109,19 +118,32 @@ const CustomDrawer = (props) => {
                 source={require('../OnboardingImgs/profile.png')}
                 style={{height:60 , width:60 , borderRadius:40 , marginTop:10 , marginLeft:55}}
               />
+              <Text style={{paddingTop:20, paddingLeft:50, fontSize:12}}>{(user?.result?.name) ? (user.result.name) : ''}</Text>
               <Text style={{paddingTop:20, paddingLeft:20, fontSize:12}}>{(user?.result?.email) ? (user.result.email) : ''}</Text>
+              
               {/* <Text style={{paddingTop:20, paddingLeft:30, fontSize:12}}>Order Count : 20</Text> */}
           </ImageBackground>
           <DrawerItemList style={{padding:30}} {...props}/>
-      </DrawerContentScrollView>
-      <View style={styles.menuWrapper}>
-      {/* <TouchableRipple onPress={() =>{}}>
-          <View style={styles.menuItem}>
-            <Icon name="share-outline" color="#FF6347" size={25}/>
-            <Text style={styles.menuItemText}>Tell Your Friends</Text>
+         
+
+      <View style={styles.infoBoxWrapper}>
+          <View style={[styles.infoBox, {
+            borderRightColor: '#dddddd',
+            borderRightWidth: 1
+          }]}>
+            <Title>₹140.50</Title>
+            <Caption>Wallet</Caption>
           </View>
-        </TouchableRipple> */}
+          <View style={styles.infoBox}>
+            <Title>12</Title>
+            <Caption>Orders</Caption>
+          </View>
       </View>
+      
+      </DrawerContentScrollView>
+      
+
+
       <View style={{padding:20 , borderTopWidth:1 , borderTopColor:'#ccc'}}>
           <TouchableOpacity onPress={()=>{}} style={{paddingVertical:15}}>
               <View style={{display:'flex', flexDirection:'row'}}>
@@ -137,7 +159,53 @@ const CustomDrawer = (props) => {
 export default CustomDrawer
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+  userInfoSection: {
+    paddingHorizontal: 30,
+    marginBottom: 25,
+  },
+  title: {
+    fontSize: 24,
+    fontWeight: 'bold',
+  },
+  caption: {
+    fontSize: 14,
+    lineHeight: 14,
+    fontWeight: '500',
+  },
+  row: {
+    flexDirection: 'row',
+    marginBottom: 10,
+  },
+  infoBoxWrapper: {
+    marginTop:150,
+    borderBottomColor: '#dddddd',
+    borderBottomWidth: 1,
+    borderTopColor: '#dddddd',
+    borderTopWidth: 1,
+    flexDirection: 'row',
+    height: 100,
+  },
+  infoBox: {
+    width: '50%',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
   menuWrapper: {
     marginTop: 10,
+  },
+  menuItem: {
+    flexDirection: 'row',
+    paddingVertical: 15,
+    paddingHorizontal: 30,
+  },
+  menuItemText: {
+    color: '#777777',
+    marginLeft: 20,
+    fontWeight: '600',
+    fontSize: 16,
+    lineHeight: 26,
   },
 })
